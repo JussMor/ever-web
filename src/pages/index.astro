@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import '../global.css';
+
 ---
 
 <Layout>
-	<Welcome />
+  <Navbar />
+
+  <section class="background" >
+     <div class="container">
+       <div class="container-text-dsk">Software Solutions And <br> 
+                    Consulting On-Demand</div> 
+        <p class="container-message">Everfaz delivers high-performing, on-demand software solutions and expert consulting 
+            services to build custom enterprise applications tailored to your business needs. </p>
+     </div>    
+
+  </section>
 </Layout>
+
+
+<style>
+  .background {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 40%, rgba(0, 0, 0, 0.4) 90%),
+    url('../assets/backgroundHome.webp');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 100vh; 
+  }
+
+  .container {
+    padding: 120px 1rem 42px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 168px); 
+  }
+
+  .container-text-dsk {
+    color: white;
+    font-size: 80px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .container-message {
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+
+</style
