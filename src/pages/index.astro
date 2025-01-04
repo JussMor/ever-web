@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 
 import '../global.css';
 
@@ -11,13 +12,22 @@ import '../global.css';
 
   <section class="background" >
      <div class="container">
-       <div class="container-text-dsk">Software Solutions And <br> 
+       <div class="container__outer">
+         <div class="container__inner">
+           <div class="container-text-dsk">Software Solutions And <br> 
                     Consulting On-Demand</div> 
-        <p class="container-message">Everfaz delivers high-performing, on-demand software solutions and expert consulting 
+           <p class="container-message">Everfaz delivers high-performing, on-demand software solutions and expert consulting 
             services to build custom enterprise applications tailored to your business needs. </p>
+           <div class="container__buttons">
+             <button class="btn btn-primary">Talk to Sales</button> 
+             <button class="btn btn-secondary">Learn More</button>
+           </div>
+          </div>
+        </div>
      </div>    
 
   </section>
+  <Footer />
 </Layout>
 
 
@@ -27,31 +37,120 @@ import '../global.css';
     url('../assets/backgroundHome.webp');
     background-size: cover; 
     background-repeat: no-repeat;
-    height: 100vh; 
+  }
+
+
+
+  .container__outer {
+    height: 100%;
+  }
+  
+  .container__inner {
+    display: flex;
+    height: 100%;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .container {
-    padding: 120px 1rem 42px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    height: calc(100vh - 168px); 
+    padding: 42px 1rem;
   }
 
   .container-text-dsk {
     color: white;
-    font-size: 80px;
+    font-size: 40px;
     font-weight: 700;
-    text-align: center;
+    text-align: start;
   }
 
   .container-message {
     color: white;
     font-size: 20px;
     font-weight: 400;
+    text-align: start;
+  }
+
+  .container__buttons {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: start;
+  }
+
+  .btn {
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0 4px 4px -4px #00000029;
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.5;
+    padding: 10px 16px;
+    transition: .25s ease;
+    white-space: nowrap;
+    width: max-content;
+    width: fit-content;
+    border-width:  0px;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: black;
+  }
+
+  .btn-primary:hover {
+    background-color: #231F20;
+    color: white;
+    border: 1px solid white;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+  }
+
+  .btn-secondary:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+  }
+
+
+  @media (min-width: 1024px) {
+    .background {
+      height: 100vh; 
+    }
+
+    .container {
+    padding: 120px 1rem 42px;
+    height: calc(100vh - 168px); 
+    }
+
+
+    .container-text-dsk {
+      font-size: 80px;
     text-align: center;
-    padding: 0 2rem;
+    }
+
+    .container-message {
+      font-size: 24px;
+    text-align: center;
+    }
+
+    .container__inner {
+      align-items: center;
+    }
+
+    .container__buttons {
+      justify-content: center;
+    }
   }
 
 
