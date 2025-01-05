@@ -18,20 +18,21 @@ hamburguer.addEventListener('click', () => {
 
 
 <nav class="navbar-container">
+  <div class="navbar-container-inner">
   <div class="navbar-container-elem">
     <div class="navbar-container-elem__logo">
-     <div>
+      <a href="/">
         <svg width="83" height="42" viewBox="0 0 83 42" fill="none" xmlns="http://www.w3.org/2000/svg">
            <path d="M66.4742 27.415L58.6327 41.5942H1L3.14142 37.5837H22.6432L28.2629 27.415H66.4742Z" fill="#231F20" stroke="#231F20" stroke-width="0.5" stroke-miterlimit="10"/>
            <path d="M80.9815 1C79.0566 4.49064 75.0833 11.6638 73.1461 15.1792C70.6457 15.1668 54.8326 15.1916 52.7902 15.2225L51.2244 18.1623H54.5665C53.5453 19.9757 51.3234 24.0419 50.3331 25.8182H14.9254L16.4913 22.8784H30.5776L34.8357 15.1792H15.5258L17.6672 11.1687H37.169L42.7887 1.00619H81L80.9815 1Z" fill="#231F20" stroke="#231F20" stroke-width="0.5" stroke-miterlimit="10"/>
         </svg>
-      </div>
+      </a>
       <p class="paragraph-desk">SEEKING PROGRESS, DELIVERING IMPACT</p>
       <p class="paragraph-mobile">EVERFAZ</p>
      </div>
        <ul class="options">
          <li> 
-            <a class="option" href="#our-services">FOR COMPANIES</a>
+           <a class="option" href="/#our-services">FOR COMPANIES</a>
          </li>
           <li>
             <a class="btn btn-primary" href="/contact"> 
@@ -47,12 +48,11 @@ hamburguer.addEventListener('click', () => {
           </div>
         </div>
   </div>
-
     <div class="displayed-menu">
       <div class="displayed-menu-container">
        <ul class="options-menu">
          <li> 
-            <a class="option-menu" href="#our-services">FOR COMPANIES</a>
+           <a class="option-menu" href="/#our-services">FOR COMPANIES</a>
          </li>
           <li>
             <a class="btn btn-primary menu" href="/contact"> 
@@ -64,6 +64,7 @@ hamburguer.addEventListener('click', () => {
         </ul>
       </div>
     </div>
+</div>
 </nav>
 
 <style>
@@ -165,6 +166,11 @@ hamburguer.addEventListener('click', () => {
       position: fixed;
       z-index: 1000;
       box-shadow: 0 4px 4px -4px #00000029;
+    }
+
+    .navbar-container-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .displayed-menu {
