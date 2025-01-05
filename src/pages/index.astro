@@ -14,7 +14,7 @@ import '../global.css';
      <div class="container">
        <div class="container__outer">
          <div class="container__inner">
-           <div class="container-text-dsk">Software Solutions And <br> 
+           <div class="container-text-dsk">Software Solutions And <br class="custom-br"> 
                     Consulting On-Demand</div> 
            <p class="container-message">Everfaz delivers high-performing, on-demand software solutions and expert consulting 
             services to build custom enterprise applications tailored to your business needs. </p>
@@ -38,8 +38,6 @@ import '../global.css';
     background-size: cover; 
     background-repeat: no-repeat;
   }
-
-
 
   .container__outer {
     height: 100%;
@@ -120,6 +118,16 @@ import '../global.css';
     background-color: black;
     color: white;
     border: 1px solid white;
+  }
+
+  .custom-br {
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    .custom-br {
+      display: block;
+    }
   }
 
 
