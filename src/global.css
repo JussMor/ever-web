@@ -13,3 +13,19 @@
   font-style: italic;
   font-display: swap;
 }
+
+.accordion_title summary span {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #791ddb;
+}
+
+.accordion_title summary svg {
+  flex: 0 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .accordion_title summary span {
+    font-size: 3rem;
+  }
+}
