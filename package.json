@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.2"
+    "astro": "^5.1.2",
+    "free-astro-components": "^1.1.1"
   }
 }
