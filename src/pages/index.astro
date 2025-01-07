@@ -1,52 +1,58 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 
-import '../global.css';
-
+import "../global.css";
 ---
 
 <Layout>
   <Navbar />
 
-  <section class="background" >
-     <div class="container">
-       <div class="container__outer">
-         <div class="container__inner">
-           <div class="container-text-dsk">Software Solutions And <br class="custom-br"> 
-             Consulting <br class="custom-br-min">On-Demand</div> 
-           <p class="container-message">Everfaz delivers high-performing, on-demand software solutions and expert consulting 
-            services to build custom enterprise applications tailored to your business needs. </p>
-           <div class="container__buttons">
-             <a href="/contact" style="text-decoration: none" >
-             <button class="btn btn-primary">Talk to Sales</button> 
-             </a>
-             <a href="/#our-services" style="text-decoration: none" >
-             <button class="btn btn-secondary">Learn More</button>
-             </a>
-           </div>
+  <section class="background">
+    <div class="container">
+      <div class="container__outer">
+        <div class="container__inner">
+          <div class="container-text-dsk">
+            Software Solutions And <br class="custom-br" />
+            Consulting <br class="custom-br-min" />On-Demand
+          </div>
+          <p class="container-message">
+            Everfaz delivers high-performing, on-demand software solutions and
+            expert consulting services to build custom enterprise applications
+            tailored to your business needs.
+          </p>
+          <div class="container__buttons">
+            <a href="/contact" style="text-decoration: none">
+              <button class="btn btn-primary">Talk to Sales</button>
+            </a>
+            <a href="/#our-services" style="text-decoration: none">
+              <button class="btn btn-secondary">Learn More</button>
+            </a>
           </div>
         </div>
-     </div>    
-
+      </div>
+    </div>
   </section>
   <Footer />
 </Layout>
 
-
 <style>
   .background {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 40%, rgba(0, 0, 0, 0.4) 90%),
-    url('../assets/backgroundHome.webp');
-    background-size: cover; 
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 40%,
+        rgba(0, 0, 0, 0.4) 90%
+      ),
+      url("../assets/backgroundHome.webp");
+    background-size: cover;
     background-repeat: no-repeat;
   }
 
   .container__outer {
     height: 100%;
   }
-  
+
   .container__inner {
     display: flex;
     height: 100%;
@@ -93,11 +99,11 @@ import '../global.css';
     justify-content: center;
     line-height: 1.5;
     padding: 10px 16px;
-    transition: .25s ease;
+    transition: 0.25s ease;
     white-space: nowrap;
     width: max-content;
     width: fit-content;
-    border-width:  0px;
+    border-width: 0px;
     cursor: pointer;
   }
 
@@ -107,7 +113,7 @@ import '../global.css';
   }
 
   .btn-primary:hover {
-    background-color: #231F20;
+    background-color: #231f20;
     color: white;
     border: 1px solid white;
   }
@@ -137,27 +143,25 @@ import '../global.css';
     }
   }
 
-
   @media (min-width: 1024px) {
     .background {
-      height: 100vh; 
+      height: 100vh;
     }
 
     .container {
-    padding: 120px 1rem 42px;
-    height: calc(100vh - 168px); 
+      padding: 120px 1rem 42px;
+      height: calc(100vh - 168px);
     }
-
 
     .container-text-dsk {
       font-size: 80px;
-    text-align: center;
-    line-height: 100%;
+      text-align: center;
+      line-height: 100%;
     }
 
     .container-message {
       font-size: 24px;
-    text-align: center;
+      text-align: center;
     }
 
     .container__inner {
@@ -168,6 +172,4 @@ import '../global.css';
       justify-content: center;
     }
   }
-
-
 </style>
