@@ -10,11 +10,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "undici": "^5.28.4",
     "@astrojs/cloudflare": "^12.6.4",
+    "@libsql/client": "^0.15.11",
     "astro": "^5.13.2",
     "free-astro-components": "^1.1.1",
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "undici": "^5.28.4"
   },
   "devDependencies": {
     "@types/three": "^0.179.0",

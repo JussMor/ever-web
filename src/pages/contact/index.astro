@@ -1,7 +1,7 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
 
 import "../../global.css";
 ---
@@ -9,7 +9,224 @@ import "../../global.css";
 <Layout>
   <Navbar />
 
-  dd
+  <main class="contact-page">
+    <section class="contact-hero">
+      <div class="contact-wrapper">
+        <h1>Let’s Build Your Product</h1>
+        <form class="contact-form" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="firstName"
+                >First Name<span aria-hidden="true">*</span></label
+              >
+              <input id="firstName" name="firstName" type="text" required />
+              <div class="error">Please complete this required field.</div>
+            </div>
+            <div class="field">
+              <label for="lastName"
+                >Last Name<span aria-hidden="true">*</span></label
+              >
+              <input id="lastName" name="lastName" type="text" required />
+              <div class="error">Please complete this required field.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email"
+              >Work Email<span aria-hidden="true">*</span></label
+            >
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Work Email"
+              required
+            />
+            <div class="error">Please complete this required field.</div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <div class="phone-row">
+              <select aria-label="Country code" class="country-select">
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+593">🇪🇨 +593</option>
+              </select>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone number"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message"
+              >How can we help?<span aria-hidden="true">*</span></label
+            >
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <div class="error">Please complete this required field.</div>
+          </div>
+
+          <p class="privacy">
+            Everfaz may use your contact information to share updates about our
+            services. You may unsubscribe at any time. For more information,
+            please review our <a href="/privacy-policy">Privacy Policy</a>.
+          </p>
+
+          <div class="form-footer">
+            <div class="form-errors">Please complete all required fields.</div>
+            <button type="submit" class="btn primary">Request a Meeting</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
 
   <Footer />
 </Layout>
+
+<script src="../../components/contactForm.ts"></script>
+<style>
+  /* Layout */
+  .contact-hero {
+    background: var(--bg);
+    color: var(--text);
+    padding: 120px 1rem 42px;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-wrapper {
+    width: 100%;
+    max-width: 570px; /* desktop constraint */
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .contact-wrapper h1 {
+    font-size: 28px;
+    margin: 0 0 18px 0;
+    color: var(--text);
+  }
+
+  .contact-form {
+    display: block;
+  }
+
+  .row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+    flex: 1 1 0;
+  }
+
+  .field label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .field input,
+  .field textarea,
+  .country-select {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .country-select:focus {
+    border-color: var(--input-border-focus);
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--placeholder);
+  }
+
+  .phone-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .country-select {
+    min-width: 88px;
+  }
+
+  .field .error {
+    color: var(--error);
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+  }
+
+  .privacy {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 8px 0 18px 0;
+  }
+
+  .form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .form-errors {
+    color: var(--error);
+    display: none;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  /* Validation visible state */
+  .field.invalid .error {
+    display: block;
+  }
+  .field.invalid input,
+  .field.invalid textarea {
+    border-color: var(--error);
+  }
+  .form-errors.show {
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .row {
+      flex-direction: column;
+    }
+    .contact-wrapper {
+      padding: 20px;
+    }
+    .contact-hero {
+      padding: 32px 12px;
+    }
+  }
+</style>
