@@ -10,7 +10,15 @@ import "../global.css";
   <Navbar />
 
   <section class="background">
+    <!-- Hero WebGL canvas: full-section background -->
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+    <!-- Particles WebGL canvas -->
+    <div class="particles-wrap" aria-hidden="true">
+      <div class="particles-canvas"></div>
+    </div>
     <div class="container">
+      <!-- Background canvases wrap -->
+
       <div class="container__outer">
         <div class="container__inner">
           <div class="container-text-dsk">
@@ -41,8 +49,38 @@ import "../global.css";
   <Footer />
 </Layout>
 
+<!-- Load TS background scripts at runtime; Astro will bundle them -->
+<script src="../components/Hero3D.ts"></script>
+<!-- <script src="../components/ParticlesHero.ts"></script> -->
+
 <style>
+  /* hero WebGL canvas */
+  .particles-canvas,
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* behind overlay (z-index 1) and content (z-index 2) */
+    pointer-events: none;
+    display: block;
+    object-fit: cover;
+    max-height: 100vh;
+  }
+
+  /* subtle veil to keep foreground copy readable */
+  .background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+    z-index: 1; /* sits above canvas but below hero content */
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
   .background {
+    position: relative; /* containing block for ::after overlay */
     background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0.9) 40%,
@@ -68,19 +106,27 @@ import "../global.css";
     justify-content: center;
   }
 
+  /* Ensure all hero content sits above the canvas and veil */
+  .container__inner > * {
+    position: relative;
+    z-index: 2;
+  }
+
   .container {
     padding: 42px 1rem;
+    /* ensure absolute children (particles) are confined to this hero container */
+    position: relative;
   }
 
   .container-text-dsk {
-  color: #ffffff;
+    color: #ffffff;
     font-size: 40px;
     font-weight: 700;
     text-align: start;
   }
 
   .container-message {
-  color: #ffffff;
+    color: #ffffff;
     font-size: 20px;
     font-weight: 400;
     text-align: start;
@@ -94,10 +140,25 @@ import "../global.css";
   }
 
   /* Use global button styles; override to ensure contrast on hero */
-  .btn-primary { background-color: #ffffff; color: #000000; }
-  .btn-primary:hover { background-color: transparent; color: #ffffff; border: 1px solid #ffffff; }
-  .btn-secondary { background-color: transparent; color: #ffffff; border: 1px solid #ffffff; }
-  .btn-secondary:hover { background-color: #000000; color: #ffffff; border: 1px solid #ffffff; }
+  .btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .btn-primary:hover {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+  .btn-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+  .btn-secondary:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
 
   .custom-br {
     display: none;

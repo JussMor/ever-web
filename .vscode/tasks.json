@@ -11,6 +11,39 @@
 				"$tsc"
 			],
 			"group": "build"
+		},
+		{
+			"label": "dev:astro",
+			"type": "shell",
+			"command": "yarn dev",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "dev:astro",
+			"type": "shell",
+			"command": "yarn dev",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "dev:astro",
+			"type": "shell",
+			"command": "yarn dev",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
 		}
 	]
 }
