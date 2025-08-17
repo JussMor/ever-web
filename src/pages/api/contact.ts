@@ -72,40 +72,41 @@ export const POST: APIRoute = async ({ request, locals }) => {
 };
 
 // Optional: GET endpoint to retrieve contacts (for admin use)
-export const GET: APIRoute = async ({ locals }) => {
-  try {
-    // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
-    const env = (locals as any).runtime?.env;
+// comment for security
+// export const GET: APIRoute = async ({ locals }) => {
+//   try {
+//     // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
+//     const env = (locals as any).runtime?.env;
     
-    // Create Turso client (works in both dev and production)
-    const turso = createTursoClient(env);
+//     // Create Turso client (works in both dev and production)
+//     const turso = createTursoClient(env);
     
-    const result = await turso.execute('SELECT * FROM contacts ORDER BY created_at DESC');
+//     const result = await turso.execute('SELECT * FROM contacts ORDER BY created_at DESC');
     
-    // Convert BigInt values to numbers and map to typed objects for JSON serialization
-    const contacts: DatabaseContact[] = result.rows.map((row: any) => ({
-      id: Number(row.id),
-      first_name: String(row.first_name),
-      last_name: String(row.last_name),
-      email: String(row.email),
-      phone: row.phone ? String(row.phone) : null,
-      country_code: row.country_code ? String(row.country_code) : null,
-      message: String(row.message),
-      created_at: String(row.created_at)
-    }));
+//     // Convert BigInt values to numbers and map to typed objects for JSON serialization
+//     const contacts: DatabaseContact[] = result.rows.map((row: any) => ({
+//       id: Number(row.id),
+//       first_name: String(row.first_name),
+//       last_name: String(row.last_name),
+//       email: String(row.email),
+//       phone: row.phone ? String(row.phone) : null,
+//       country_code: row.country_code ? String(row.country_code) : null,
+//       message: String(row.message),
+//       created_at: String(row.created_at)
+//     }));
     
-    return new Response(
-      JSON.stringify({ contacts }),
-      { 
-        status: 200, 
-        headers: { 'Content-Type': 'application/json' } 
-      }
-    );
-  } catch (error) {
-    console.error('Error fetching contacts:', error);
-    return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
-};
+//     return new Response(
+//       JSON.stringify({ contacts }),
+//       { 
+//         status: 200, 
+//         headers: { 'Content-Type': 'application/json' } 
+//       }
+//     );
+//   } catch (error) {
+//     console.error('Error fetching contacts:', error);
+//     return new Response(
+//       JSON.stringify({ error: 'Internal server error' }),
+//       { status: 500, headers: { 'Content-Type': 'application/json' } }
+//     );
+//   }
+// };
