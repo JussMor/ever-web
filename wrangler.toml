@@ -4,3 +4,6 @@ compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env" ]
 
 [assets]
 directory = "./dist/"
+
+# For Cloudflare Pages builds, declare the build output directory
+pages_build_output_dir = "./dist"
