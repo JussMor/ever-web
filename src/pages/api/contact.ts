@@ -1,11 +1,17 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { turso } from '../../lib/turso';
+import { createTursoClient } from '../../lib/turso';
 import type { ContactResponse, ContactSubmission, DatabaseContact } from '../../types/contact';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
+    const env = (locals as any).runtime?.env;
+    
+    // Create Turso client (works in both dev and production)
+    const turso = createTursoClient(env);
+    
     // Parse the form data
     const body = await request.json() as ContactSubmission;
     
@@ -66,12 +72,18 @@ export const POST: APIRoute = async ({ request }) => {
 };
 
 // Optional: GET endpoint to retrieve contacts (for admin use)
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ locals }) => {
   try {
+    // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
+    const env = (locals as any).runtime?.env;
+    
+    // Create Turso client (works in both dev and production)
+    const turso = createTursoClient(env);
+    
     const result = await turso.execute('SELECT * FROM contacts ORDER BY created_at DESC');
     
     // Convert BigInt values to numbers and map to typed objects for JSON serialization
-    const contacts: DatabaseContact[] = result.rows.map(row => ({
+    const contacts: DatabaseContact[] = result.rows.map((row: any) => ({
       id: Number(row.id),
       first_name: String(row.first_name),
       last_name: String(row.last_name),
