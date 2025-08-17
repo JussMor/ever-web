@@ -10,6 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.4",
     "astro": "^5.13.2",
     "free-astro-components": "^1.1.1",
     "three": "^0.160.0"
