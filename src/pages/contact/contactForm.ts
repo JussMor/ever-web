@@ -14,20 +14,22 @@ interface ContactResponse {
   error?: string;
 }
 
-document.addEventListener('DOMContentLoaded', (): void => {
-  const form = document.querySelector('.contact-form') as HTMLFormElement;
-  if (!form) return;
+// Only run this code in the browser
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', (): void => {
+    const form = document.querySelector('.contact-form') as HTMLFormElement;
+    if (!form) return;
 
-  const requiredSelectors: string[] = ['#firstName', '#lastName', '#email', '#message'];
-  const formErrors = document.querySelector('.form-errors') as HTMLElement;
-  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const requiredSelectors: string[] = ['#firstName', '#lastName', '#email', '#message'];
+    const formErrors = document.querySelector('.form-errors') as HTMLElement;
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 
-  function validate(): boolean {
-    let firstInvalid: Element | null = null;
-    
-    requiredSelectors.forEach((sel: string): void => {
-      const el = document.querySelector(sel);
-      if (!el || !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+    function validate(): boolean {
+      let firstInvalid: Element | null = null;
+      
+      requiredSelectors.forEach((sel: string): void => {
+        const el = document.querySelector(sel);
+        if (!el || !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
       
       const fieldContainer = el.closest('.field') as HTMLElement;
       if (!el.checkValidity()) {
@@ -133,4 +135,5 @@ document.addEventListener('DOMContentLoaded', (): void => {
       }
     });
   });
-});
+  });
+}

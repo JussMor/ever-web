@@ -14,39 +14,41 @@ interface ContactResponse {
   error?: string;
 }
 
-document.addEventListener('DOMContentLoaded', (): void => {
-  const form = document.querySelector('.contact-form') as HTMLFormElement;
-  if (!form) return;
+// Only run this code in the browser
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', (): void => {
+    const form = document.querySelector('.contact-form') as HTMLFormElement;
+    if (!form) return;
 
-  const requiredSelectors: string[] = ['#firstName', '#lastName', '#email', '#message'];
-  const formErrors = document.querySelector('.form-errors') as HTMLElement;
-  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const requiredSelectors: string[] = ['#firstName', '#lastName', '#email', '#message'];
+    const formErrors = document.querySelector('.form-errors') as HTMLElement;
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 
-  function validate(): boolean {
-    let firstInvalid: Element | null = null;
-    
-    requiredSelectors.forEach((sel: string): void => {
-      const el = document.querySelector(sel);
-      if (!el || !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+    function validate(): boolean {
+      let firstInvalid: Element | null = null;
       
-      const fieldContainer = el.closest('.field') as HTMLElement;
-      if (!el.checkValidity()) {
-        if (fieldContainer) fieldContainer.classList.add('invalid');
-        if (!firstInvalid) firstInvalid = el;
-      } else {
-        if (fieldContainer) fieldContainer.classList.remove('invalid');
-      }
-    });
+      requiredSelectors.forEach((sel: string): void => {
+        const el = document.querySelector(sel);
+        if (!el || !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+        
+        const fieldContainer = el.closest('.field') as HTMLElement;
+        if (!el.checkValidity()) {
+          if (fieldContainer) fieldContainer.classList.add('invalid');
+          if (!firstInvalid) firstInvalid = el;
+        } else {
+          if (fieldContainer) fieldContainer.classList.remove('invalid');
+        }
+      });
 
-    if (firstInvalid) {
-      if (formErrors) formErrors.classList.add('show');
-      (firstInvalid as HTMLInputElement | HTMLTextAreaElement).focus();
-      return false;
+      if (firstInvalid) {
+        if (formErrors) formErrors.classList.add('show');
+        (firstInvalid as HTMLInputElement | HTMLTextAreaElement).focus();
+        return false;
+      }
+      
+      if (formErrors) formErrors.classList.remove('show');
+      return true;
     }
-    
-    if (formErrors) formErrors.classList.remove('show');
-    return true;
-  }
 
   function setLoading(loading: boolean): void {
     if (submitButton) {
@@ -133,4 +135,5 @@ document.addEventListener('DOMContentLoaded', (): void => {
       }
     });
   });
-});
+  });
+}
