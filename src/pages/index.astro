@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 
 import "../global.css";
 ---
@@ -73,14 +73,14 @@ import "../global.css";
   }
 
   .container-text-dsk {
-    color: white;
+  color: #ffffff;
     font-size: 40px;
     font-weight: 700;
     text-align: start;
   }
 
   .container-message {
-    color: white;
+  color: #ffffff;
     font-size: 20px;
     font-weight: 400;
     text-align: start;
@@ -93,46 +93,11 @@ import "../global.css";
     justify-content: start;
   }
 
-  .btn {
-    align-items: center;
-    border-radius: 30px;
-    box-shadow: 0 4px 4px -4px #00000029;
-    display: flex;
-    font-size: 18px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.5;
-    padding: 10px 16px;
-    transition: 0.25s ease;
-    white-space: nowrap;
-    width: max-content;
-    width: fit-content;
-    border-width: 0px;
-    cursor: pointer;
-  }
-
-  .btn-primary {
-    background-color: white;
-    color: black;
-  }
-
-  .btn-primary:hover {
-    background-color: #231f20;
-    color: white;
-    border: 1px solid white;
-  }
-
-  .btn-secondary {
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
-  }
-
-  .btn-secondary:hover {
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-  }
+  /* Use global button styles; override to ensure contrast on hero */
+  .btn-primary { background-color: #ffffff; color: #000000; }
+  .btn-primary:hover { background-color: transparent; color: #ffffff; border: 1px solid #ffffff; }
+  .btn-secondary { background-color: transparent; color: #ffffff; border: 1px solid #ffffff; }
+  .btn-secondary:hover { background-color: #000000; color: #ffffff; border: 1px solid #ffffff; }
 
   .custom-br {
     display: none;

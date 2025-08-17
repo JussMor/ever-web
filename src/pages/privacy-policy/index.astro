@@ -1,8 +1,8 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
-import Footer from "../../components/Footer.astro";
 import { Accordion, AccordionItem } from "free-astro-components";
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
 
 import "../../global.css";
 ---
@@ -12,7 +12,7 @@ import "../../global.css";
 
   <section class="external-container">
     <div class="container">
-      <h1 class="title">Everfaz Privacy Policy</h1>
+  <h1 class="title">Everfaz Privacy Policy</h1>
 
       <p class="content">
         At Everfaz, we recognize that the trust of our employees, contractors,
@@ -69,7 +69,6 @@ import "../../global.css";
               <strong>Personnel</strong> is any individual who works for Everfaz
               in their capacity as an employee or contractor.
             </li>
-
             <li class="content">
               <strong>Visitor</strong> is any individual who works for Everfaz in
               their capacity as an employee or contractor.
@@ -88,27 +87,13 @@ import "../../global.css";
           </p>
           <ul>
             <li class="content">Visit our website</li>
-            <li class="content">
-              Subscribe to our newsletters, download content, or sign up for an
-              event.
-            </li>
+            <li class="content">Subscribe to our newsletters, download content, or sign up for an event.</li>
             <li class="content">Set up an account with us.</li>
-
-            <li class="content">
-              Submit an application to join Everfaz or our communities.
-            </li>
-            <li class="content">
-              Enquire about hiring Everfaz developers or any of our products,
-              services, or solutions on your own behalf or on behalf of a
-              client.
-            </li>
-            <li class="content">
-              Engage Everfaz to provide products, services, or solutions,
-              whether on your own behalf or on behalf of a client.
-            </li>
+            <li class="content">Submit an application to join Everfaz or our communities.</li>
+            <li class="content">Enquire about hiring Everfaz developers or any of our products, services, or solutions on your own behalf or on behalf of a client.</li>
+            <li class="content">Engage Everfaz to provide products, services, or solutions, whether on your own behalf or on behalf of a client.</li>
             <li class="content">Engage with us via social media.</li>
             <li class="content">Contact our dedicated support team.</li>
-
             <li class="content">Contact us via phone or email.</li>
           </ul>
 
@@ -734,9 +719,7 @@ import "../../global.css";
 </Layout>
 
 <style>
-  .external-container {
-    padding: 0px 1rem 42px;
-  }
+  .external-container { padding: 0px 1rem 42px; background: var(--bg); }
 
   .container {
     max-width: 1200px;
@@ -744,18 +727,21 @@ import "../../global.css";
   }
 
   .title {
+    color: var(--text);
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
   }
 
   .subtitle {
+    color: var(--text);
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 1rem;
   }
 
   .content {
+    color: var(--muted);
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 1rem;

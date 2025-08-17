@@ -14,10 +14,104 @@
   font-display: swap;
 }
 
+/* Theme variables */
+:root {
+  /* Surfaces */
+  --bg: #ffffff;
+  --surface: #f8f9fb;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+
+  /* Text & accents */
+  --text: #111111;
+  --muted: #717171;
+  --accent: #791ddb; /* brand accent */
+  --link: var(--text);
+  --link-hover: var(--accent);
+  --logo-color: #231f20;
+
+  /* Primary buttons */
+  --primary: #000000;
+  --primary-contrast: #ffffff;
+
+  /* Borders */
+  --border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --bg: #0b0b0f;
+  --surface: #111114;
+  --nav-bg: #0b0b0f;
+  --card-bg: #111114;
+
+  --text: #e6e6e6;
+  --muted: #a3a3a3;
+  --accent: #9e6bff; /* accessible purple on dark */
+  --link: var(--text);
+  --link-hover: var(--accent);
+  --logo-color: #f5f5f5;
+
+  --primary: #ffffff;
+  --primary-contrast: #1a1a1a;
+
+  --border: #27272a;
+}
+
+/* Base styles */
+* { box-sizing: border-box; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+
+/* Shared buttons */
+.btn {
+  align-items: center;
+  border-radius: 30px;
+  box-shadow: 0 4px 4px -4px #00000029;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 10px 16px;
+  white-space: nowrap;
+  width: max-content;
+  border: 0;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background-color: var(--bg);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+}
+.btn-secondary:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
 .accordion_title summary span {
   font-size: 2rem;
   font-weight: 500;
-  color: #791ddb;
+  color: var(--accent);
 }
 
 .accordion_title summary svg {
