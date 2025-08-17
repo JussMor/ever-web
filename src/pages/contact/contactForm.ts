@@ -135,5 +135,5 @@ if (typeof document !== 'undefined') {
       }
     });
   });
-  });
+});
 }
