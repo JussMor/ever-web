@@ -113,6 +113,13 @@ if (typeof document !== 'undefined') {
           n.classList.remove('invalid'); 
         });
         showMessage('Thanks! Your request has been sent successfully.', false);
+        // open confirmation modal if available
+        try {
+          const fn = (window as any)['showSubmissionModal'];
+          if (typeof fn === 'function') fn();
+        } catch (err) {
+          // ignore if not available
+        }
       } else {
         showMessage(result.error || 'Something went wrong. Please try again.', true);
       }

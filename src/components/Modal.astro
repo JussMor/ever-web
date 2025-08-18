@@ -1,0 +1,70 @@
+---
+---
+<div id="submission-modal" class="ef-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="ef-modal-overlay" data-close></div>
+  <div class="ef-modal-panel" role="document">
+    <button class="ef-modal-close" aria-label="Close" data-close>&times;</button>
+    <div class="ef-modal-body">
+      <h2>Thanks for your submission</h2>
+      <p>We received your message and will get back to you shortly.</p>
+      <div class="ef-modal-actions">
+        <button class="btn primary" data-close>OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ef-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .ef-modal.open { display: flex; }
+  .ef-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(2px); }
+  .ef-modal-panel { position: relative; background: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 10px; max-width: 420px; width: calc(100% - 40px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(8px); }
+  .ef-modal-close { position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 20px; cursor: pointer; color: var(--text); }
+  .ef-modal-body h2 { margin: 0 0 8px 0; font-size: 20px; color: var(--text); }
+  .ef-modal-body p { margin: 0 0 16px 0; color: var(--muted); }
+  .ef-modal-actions { display: flex; justify-content: flex-end; }
+  .ef-modal .btn.primary { padding: 8px 14px; border-radius: 8px; }
+  @media (max-width: 480px) { .ef-modal-panel { padding: 16px; } }
+</style>
+
+<script>
+  (function () {
+    var modal = document.getElementById('submission-modal');
+    if (!modal) return;
+
+    function openModal() {
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var btn = modal.querySelector('[data-close]');
+      if (btn instanceof HTMLElement && typeof btn.focus === 'function') btn.focus();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    modal.addEventListener('click', function (e) {
+      var target = e.target;
+      var el = target instanceof Element ? target : null;
+      if (el && el.matches('[data-close]')) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal && modal.classList && modal.classList.contains('open')) closeModal();
+    });
+
+    try {
+      window['showSubmissionModal'] = openModal;
+      window['hideSubmissionModal'] = closeModal;
+    } catch (err) {
+      // ignore in environments without window
+    }
+  })();
+</script>
