@@ -61,7 +61,9 @@
     });
 
     try {
+      // @ts-ignore - intentionally add runtime-only property to window
       window['showSubmissionModal'] = openModal;
+      // @ts-ignore - intentionally add runtime-only property to window
       window['hideSubmissionModal'] = closeModal;
     } catch (err) {
       // ignore in environments without window
