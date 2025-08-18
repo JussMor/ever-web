@@ -2,6 +2,7 @@
 import Footer from "../../components/Footer.astro";
 import Modal from "../../components/Modal.astro";
 import Navbar from "../../components/Navbar.astro";
+import countryCodes from "../../constants/country-codes";
 import Layout from "../../layouts/Layout.astro";
 
 import "../../global.css";
@@ -49,17 +50,55 @@ import "../../global.css";
           <div class="field">
             <label for="phone">Phone Number</label>
             <div class="phone-row">
-              <select aria-label="Country code" class="country-select">
-                <option value="+1">🇺🇸 +1</option>
-                <option value="+44">🇬🇧 +44</option>
-                <option value="+593">🇪🇨 +593</option>
-              </select>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="Phone number"
-              />
+              <div class="country-select-wrapper">
+                <div class="country-dropdown" data-open="false">
+                  <button
+                    type="button"
+                    class="country-toggle"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                  >
+                    <span class="country-current">🇺🇸 +1</span>
+                    <span class="caret">▾</span>
+                  </button>
+                  <input
+                    type="hidden"
+                    name="countryCode"
+                    class="country-code-input"
+                    value="+1"
+                  />
+                </div>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone number"
+                />
+                
+                <div class="country-panel" role="listbox" hidden>
+                  <input
+                    class="country-panel-search"
+                    type="text"
+                    placeholder="Search country or code"
+                    aria-label="Search country code"
+                  />
+                  <ul class="country-list">
+                    {
+                      countryCodes.map((c) => (
+                        <li
+                          role="option"
+                          tabindex="-1"
+                          data-value={c.dial_code}
+                          data-iso={c.iso}
+                          data-name={c.name}
+                        >
+                          {c.flag} {c.dial_code} {c.name}
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -110,7 +149,9 @@ import "../../global.css";
     border: 1px solid var(--border);
     padding: 32px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   .contact-wrapper h1 {
@@ -169,8 +210,117 @@ import "../../global.css";
     gap: 10px;
   }
 
+  .country-select-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
   .country-select {
     min-width: 88px;
+  }
+
+  /* Custom country dropdown styles */
+  .country-dropdown {
+    position: static;
+    min-width: 88px;
+  }
+
+  .country-toggle {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  .country-toggle:focus {
+    border-color: var(--input-border-focus);
+  }
+
+  .country-toggle .caret {
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .country-dropdown[data-open="true"] .country-toggle .caret {
+    transform: rotate(180deg);
+  }
+
+  .country-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-top: 4px;
+    max-height: 200px;
+    overflow: hidden;
+    /* When hidden attribute is present, do not block clicks */
+    pointer-events: auto;
+  }
+
+  /* Ensure hidden panels don't block interactions */
+  .country-panel[hidden] {
+    display: none !important;
+    pointer-events: none;
+  }
+
+  .country-panel-search {
+    background: var(--input-bg);
+    border: none;
+    border-bottom: 1px solid var(--input-border);
+    color: var(--text);
+    padding: 12px 14px;
+    width: 100%;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  .country-panel-search::placeholder {
+    color: var(--placeholder);
+  }
+
+  .country-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
+  .country-list li {
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--input-border);
+    transition: background-color 0.2s ease;
+  }
+
+  .country-list li:last-child {
+    border-bottom: none;
+  }
+
+  .country-list li:hover,
+  .country-list li:focus {
+    background: var(--input-border);
+    outline: none;
   }
 
   .field .error {
