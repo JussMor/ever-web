@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="NI+LRi7x9VcBsfm697umMQ"
+      async></script>
+    <meta
+      name="ahrefs-site-verification"
+      content="fd70044e9aa59bd362411e1870fd84d4b4c5eb1d1e34f24926def7807949bcd7"
+    />
     <meta
       name="facebook-domain-verification"
       content="ypcutd4d2gcxau2qzd1dnsl7i836nt"
@@ -25,10 +33,14 @@
     <script>
       try {
         const saved = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = saved || (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-      } catch (e) { /* noop */ }
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        /* noop */
+      }
     </script>
   </head>
   <body>
