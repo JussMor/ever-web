@@ -185,7 +185,7 @@ export class AWSEmailService {
             },
             {
               Name: "ConsentDate",
-              Value: contact.consentDate.toISOString(),
+              Value: contact.consentDate.toISOString().replace(/[<>:]/g, "-"),
             },
             {
               Name: "Template",

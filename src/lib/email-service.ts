@@ -183,7 +183,7 @@ export class EmailService {
       const success = await this.awsEmailService.sendTemplatedEmail({
         to: recipients,
         from: params.from || import.meta.env.EMAIL || "contact@everfaz.com",
-        templateName: params.templateName,
+        templateName: template.name, // Use the actual SES template name from manifest
         templateData: {
           ...params.templateData,
           // Add compliance-required fields
@@ -231,7 +231,7 @@ export class EmailService {
       // Send confirmation email using SES template (templates created via scripts/create-ses-templates.js)
       const result = await this.sendTemplatedEmail({
         to: params.email,
-        templateName: "contact-confirmation",
+        templateName: "contactConfirmation",
         templateData: {
           name: params.name,
           email: params.email,
