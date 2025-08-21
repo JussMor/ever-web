@@ -1,0 +1,159 @@
+---
+// Admin page for managing SES email templates
+// Access at: /admin/email-templates
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Templates Admin - Everfaz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-6xl mx-auto py-12 px-4">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Email Templates Admin</h1>
+      <p class="text-gray-600">Manage AWS SES email templates</p>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="status" class="hidden mb-6"></div>
+
+    <!-- Template List -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Current Templates</h2>
+      <div id="template-list" class="space-y-4">
+        <div class="text-gray-500">Loading templates...</div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Actions</h2>
+      <div class="flex flex-wrap gap-4">
+        <button 
+          id="create-templates-btn"
+          class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+        >
+          Create/Update Templates
+        </button>
+        <button 
+          id="refresh-btn"
+          class="bg-gray-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+        >
+          Refresh List
+        </button>
+      </div>
+      
+      <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+        <h3 class="font-medium text-blue-900 mb-2">Available Templates:</h3>
+        <ul class="text-sm text-blue-800 space-y-1">
+          <li><strong>welcome:</strong> Welcome email for new contacts</li>
+          <li><strong>contact-confirmation:</strong> Contact form confirmation email</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let templates = [];
+
+    // Show status message
+    function showStatus(message, type = 'info') {
+      const statusDiv = document.getElementById('status');
+      if (!statusDiv) return;
+      
+      const bgColor = type === 'success' ? 'bg-green-50 border-green-200 text-green-800' 
+                     : type === 'error' ? 'bg-red-50 border-red-200 text-red-800'
+                     : 'bg-blue-50 border-blue-200 text-blue-800';
+      
+      statusDiv.className = `border rounded-lg p-4 ${bgColor}`;
+      statusDiv.textContent = message;
+      statusDiv.classList.remove('hidden');
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        if (statusDiv) statusDiv.classList.add('hidden');
+      }, 5000);
+    }
+
+    // Fetch template list
+    async function fetchTemplates() {
+      try {
+        showStatus('Loading templates...');
+        const response = await fetch('/api/admin/create-ses-templates');
+        const data = await response.json();
+        
+        if (data.success) {
+          templates = data.templates || [];
+          renderTemplateList();
+          showStatus('Templates loaded successfully', 'success');
+        } else {
+          showStatus(`Error loading templates: ${data.error}`, 'error');
+        }
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        showStatus(`Network error: ${errorMessage}`, 'error');
+      }
+    }
+
+    // Render template list
+    function renderTemplateList() {
+      const listDiv = document.getElementById('template-list');
+      if (!listDiv) return;
+      
+      if (templates.length === 0) {
+        listDiv.innerHTML = '<div class="text-gray-500">No templates found</div>';
+        return;
+      }
+
+      listDiv.innerHTML = templates.map(template => `
+        <div class="flex items-center justify-between p-4 border rounded-lg ${template.exists ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}">
+          <div>
+            <h3 class="font-medium text-gray-900">${template.name}</h3>
+            ${template.subject ? `<p class="text-sm text-gray-600 mt-1">${template.subject}</p>` : ''}
+          </div>
+          <div class="flex items-center">
+            <span class="px-3 py-1 rounded-full text-xs font-medium ${template.exists ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+              ${template.exists ? 'EXISTS' : 'MISSING'}
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Create/update templates
+    async function createTemplates() {
+      try {
+        showStatus('Creating/updating templates...');
+        const response = await fetch('/api/admin/create-ses-templates', {
+          method: 'POST'
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+          showStatus(`Templates processed successfully: ${data.message}`, 'success');
+          await fetchTemplates(); // Refresh the list
+        } else {
+          showStatus(`Template operation completed with issues: ${data.message}`, 'error');
+          console.error('Template errors:', data.errors);
+        }
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        showStatus(`Error creating templates: ${errorMessage}`, 'error');
+      }
+    }
+
+    // Event listeners
+    const createBtn = document.getElementById('create-templates-btn');
+    const refreshBtn = document.getElementById('refresh-btn');
+    
+    if (createBtn) createBtn.addEventListener('click', createTemplates);
+    if (refreshBtn) refreshBtn.addEventListener('click', fetchTemplates);
+
+    // Load templates on page load
+    fetchTemplates();
+  </script>
+</body>
+</html>

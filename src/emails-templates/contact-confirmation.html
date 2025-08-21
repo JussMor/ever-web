@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Received Your Message - Everfaz</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 40px 20px; text-align: center; border-bottom: 1px solid #e2e8f0;">
+              <h1 style="color: #1e293b; font-size: 28px; font-weight: 600; margin: 0;">Message Received!</h1>
+              <div style="width: 60px; height: 4px; background-color: #10b981; margin: 20px auto 0; border-radius: 2px;"></div>
+            </td>
+          </tr>
+          
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 40px;">
+              <p style="color: #334155; font-size: 16px; line-height: 1.6; margin: 0 0 20px;">
+                Hi {{name}},
+              </p>
+              
+              <p style="color: #334155; font-size: 16px; line-height: 1.6; margin: 0 0 20px;">
+                Thank you for reaching out to Everfaz! We've successfully received your message and appreciate you taking the time to contact us.
+              </p>
+              
+              <div style="background-color: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 20px; margin: 30px 0; border-radius: 0 6px 6px 0;">
+                <h3 style="color: #0c4a6e; font-size: 16px; font-weight: 600; margin: 0 0 12px;">Your Message Summary:</h3>
+                <p style="color: #075985; font-size: 14px; margin: 0 0 8px;"><strong>Subject:</strong> {{subject}}</p>
+                <p style="color: #075985; font-size: 14px; margin: 0 0 8px;"><strong>Email:</strong> {{email}}</p>
+                <p style="color: #075985; font-size: 14px; margin: 0;"><strong>Submitted:</strong> {{submissionDate}}</p>
+              </div>
+              
+              <h3 style="color: #1e293b; font-size: 18px; font-weight: 600; margin: 30px 0 16px;">What happens next?</h3>
+              
+              <ul style="color: #334155; font-size: 16px; line-height: 1.6; margin: 0 0 30px; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Our team will review your inquiry within 24 hours</li>
+                <li style="margin-bottom: 8px;">We'll reach out to schedule a discovery call if your project is a good fit</li>
+                <li style="margin-bottom: 8px;">You'll receive a detailed proposal within 48-72 hours</li>
+              </ul>
+              
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="https://everfaz.com/portfolio" style="display: inline-block; background-color: #3b82f6; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; margin-right: 16px;">
+                  View Our Work
+                </a>
+                <a href="https://everfaz.com/about" style="display: inline-block; background-color: transparent; color: #3b82f6; text-decoration: none; padding: 12px 24px; border: 2px solid #3b82f6; border-radius: 6px; font-weight: 600;">
+                  Learn More
+                </a>
+              </div>
+              
+              <p style="color: #334155; font-size: 16px; line-height: 1.6; margin: 0;">
+                Looking forward to working with you!<br><br>
+                Best regards,<br>
+                The Everfaz Team
+              </p>
+            </td>
+          </tr>
+          
+          <!-- Compliance Section -->
+          <tr>
+            <td style="padding: 0 40px 40px;">
+              <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #e2e8f0; background-color: #f8fafc; border-radius: 6px;">
+                <h3 style="color: #475569; font-size: 14px; font-weight: 600; margin: 0 0 12px;">Email Communication Notice</h3>
+                <p style="color: #64748b; font-size: 12px; line-height: 1.5; margin: 0 0 12px;">
+                  {{consentReminder}}
+                </p>
+                
+                <p style="color: #64748b; font-size: 12px; line-height: 1.5; margin: 0 0 12px;">
+                  <strong>Unsubscribe:</strong> You can <a href="{{unsubscribeUrl}}" style="color: #3b82f6;">unsubscribe here</a> at any time.
+                </p>
+                
+                <p style="color: #64748b; font-size: 12px; line-height: 1.5; margin: 0;">
+                  <strong>Our Commitment:</strong> We comply with the AWS Acceptable Use Policy and maintain proper bounce and complaint handling processes.
+                </p>
+                
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+                  <p style="color: #64748b; font-size: 12px; margin: 0;">
+                    {{companyName}}<br>
+                    {{companyAddress}}
+                  </p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

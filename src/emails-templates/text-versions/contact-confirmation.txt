@@ -1,0 +1,37 @@
+MESSAGE RECEIVED!
+
+Hi {{name}},
+
+Thank you for reaching out to Everfaz! We've successfully received your message and appreciate you taking the time to contact us.
+
+YOUR MESSAGE SUMMARY:
+- Subject: {{subject}}
+- Email: {{email}}
+- Submitted: {{submissionDate}}
+
+WHAT HAPPENS NEXT?
+• Our team will review your inquiry within 24 hours
+• We'll reach out to schedule a discovery call if your project is a good fit  
+• You'll receive a detailed proposal within 48-72 hours
+
+View our work: https://everfaz.com/portfolio
+Learn more: https://everfaz.com/about
+
+Looking forward to working with you!
+
+Best regards,
+The Everfaz Team
+
+---
+
+EMAIL COMMUNICATION NOTICE
+{{consentReminder}}
+
+UNSUBSCRIBE:
+You can unsubscribe at: {{unsubscribeUrl}}
+
+OUR COMMITMENT:
+We comply with the AWS Acceptable Use Policy and maintain proper bounce and complaint handling processes.
+
+{{companyName}}
+{{companyAddress}}

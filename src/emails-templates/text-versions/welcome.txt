@@ -1,0 +1,26 @@
+WELCOME TO EVERFAZ!
+
+Hi {{name}},
+
+Thank you for your interest in Everfaz! We're excited to connect with you and help bring your digital vision to life.
+
+Our team will review your inquiry and get back to you within 24 hours with next steps.
+
+Visit our website: https://everfaz.com
+
+Best regards,
+The Everfaz Team
+
+---
+
+WHY DID YOU RECEIVE THIS EMAIL?
+{{consentReminder}}
+
+UNSUBSCRIBE:
+You can unsubscribe at: {{unsubscribeUrl}}
+
+OUR COMMITMENT:
+We comply with the AWS Acceptable Use Policy and maintain proper bounce and complaint handling processes.
+
+{{companyName}}
+{{companyAddress}}
