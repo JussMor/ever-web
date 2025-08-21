@@ -7,8 +7,9 @@ import { createEmailService } from "../../lib/email-service.js";
  * AWS SES Webhook Handler
  * Processes bounce and complaint notifications from AWS SES
  */
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const env = (locals as any).runtime?.env;
     const body = await request.text();
 
     // Verify the request is from AWS SNS (in production, you should verify the signature)
@@ -40,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Handle notifications
     if (snsMessage.Type === "Notification") {
-      const emailService = createEmailService(import.meta.env);
+      const emailService = createEmailService(env);
 
       // Process the webhook
       await emailService.processWebhook(snsMessage);

@@ -50,6 +50,13 @@ export class AWSEmailService {
   }
 
   /**
+   * Get SES client for admin operations (template management, etc.)
+   */
+  getSESClient(): SESClient {
+    return this.sesClient;
+  }
+
+  /**
    * Send email with AUP compliance checks
    */
   async sendEmail(params: {
@@ -298,19 +305,18 @@ export class DefaultBounceComplaintHandler implements BounceComplaintHandler {
 /**
  * Factory function to create AWS SES service with environment variables
  */
-export function createAWSEmailService(env?: any): AWSEmailService {
+export function createAWSEmailService(
+  env?: any,
+  bounceHandler?: BounceComplaintHandler,
+): AWSEmailService {
   const accessKeyId =
     env?.AWS_ACCESS_KEY_ID || import.meta.env.AWS_ACCESS_KEY_ID || "";
   const secretAccessKey =
     env?.AWS_SECRET_ACCESS_KEY || import.meta.env.AWS_SECRET_ACCESS_KEY || "";
   const region = env?.AWS_REGION || import.meta.env.AWS_REGION || "us-east-1";
 
-  const bounceHandler = new DefaultBounceComplaintHandler();
+  // Use provided bounce handler or create default one
+  const handler = bounceHandler || new DefaultBounceComplaintHandler();
 
-  return new AWSEmailService(
-    accessKeyId,
-    secretAccessKey,
-    region,
-    bounceHandler,
-  );
+  return new AWSEmailService(accessKeyId, secretAccessKey, region, handler);
 }

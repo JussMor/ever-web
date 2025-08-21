@@ -3,8 +3,9 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { createEmailService } from "../../lib/email-service.js";
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const env = (locals as any).runtime?.env;
     const formData = await request.formData();
     const email = formData.get("email") as string;
 
@@ -21,7 +22,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const emailService = createEmailService(import.meta.env);
+    const emailService = createEmailService(env);
     const success = await emailService.unsubscribeEmail(email);
 
     if (success) {
@@ -62,12 +63,13 @@ export const POST: APIRoute = async ({ request }) => {
   }
 };
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, locals }) => {
+  const env = (locals as any).runtime?.env;
   const email = url.searchParams.get("email");
 
   if (email) {
     // Auto-unsubscribe for GET requests with email parameter
-    const emailService = createEmailService(import.meta.env);
+    const emailService = createEmailService(env);
     await emailService.unsubscribeEmail(email);
   }
 

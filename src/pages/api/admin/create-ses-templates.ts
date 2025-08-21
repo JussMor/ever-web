@@ -1,13 +1,13 @@
 import {
   CreateTemplateCommand,
   GetTemplateCommand,
-  SESClient,
   UpdateTemplateCommand,
 } from "@aws-sdk/client-ses";
 import type { APIRoute } from "astro";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { createAWSEmailService } from "../../../lib/aws-ses.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,18 +23,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
     const env = (locals as any).runtime?.env;
 
-    // Initialize SES client
-    const sesClient = new SESClient({
-      region: env?.AWS_REGION || import.meta.env.AWS_REGION || "us-east-1",
-      credentials: {
-        accessKeyId:
-          env?.AWS_ACCESS_KEY_ID || import.meta.env.AWS_ACCESS_KEY_ID || "",
-        secretAccessKey:
-          env?.AWS_SECRET_ACCESS_KEY ||
-          import.meta.env.AWS_SECRET_ACCESS_KEY ||
-          "",
-      },
-    });
+    // Use the factory function instead of duplicating SES client creation
+    const awsEmailService = createAWSEmailService(env);
+    const sesClient = awsEmailService.getSESClient();
 
     const results = [];
     const errors = [];
@@ -147,17 +138,9 @@ export const GET: APIRoute = async ({ locals }) => {
   try {
     const env = (locals as any).runtime?.env;
 
-    const sesClient = new SESClient({
-      region: env?.AWS_REGION || import.meta.env.AWS_REGION || "us-east-1",
-      credentials: {
-        accessKeyId:
-          env?.AWS_ACCESS_KEY_ID || import.meta.env.AWS_ACCESS_KEY_ID || "",
-        secretAccessKey:
-          env?.AWS_SECRET_ACCESS_KEY ||
-          import.meta.env.AWS_SECRET_ACCESS_KEY ||
-          "",
-      },
-    });
+    // Use the factory function instead of duplicating SES client creation
+    const awsEmailService = createAWSEmailService(env);
+    const sesClient = awsEmailService.getSESClient();
 
     // List templates (SES doesn't have a direct list command, so we'll try to get our known templates)
     const templateNames = ["welcome", "contact-confirmation"];

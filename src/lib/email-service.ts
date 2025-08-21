@@ -4,7 +4,11 @@ import {
   getComplianceRequirements,
   validateTemplateData,
 } from "../emails-templates/template-manifest.js";
-import { AWSEmailService, type EmailContact } from "./aws-ses.js";
+import {
+  AWSEmailService,
+  createAWSEmailService,
+  type EmailContact,
+} from "./aws-ses.js";
 import { BounceComplaintHandler } from "./bounce-complaint-handler.js";
 import { createTursoClient } from "./turso.js";
 
@@ -15,12 +19,7 @@ export class EmailService {
 
   constructor(env?: any) {
     this.bounceHandler = new BounceComplaintHandler(env);
-    this.awsEmailService = new AWSEmailService(
-      env?.AWS_ACCESS_KEY_ID || import.meta.env.AWS_ACCESS_KEY_ID || "",
-      env?.AWS_SECRET_ACCESS_KEY || import.meta.env.AWS_SECRET_ACCESS_KEY || "",
-      env?.AWS_REGION || import.meta.env.AWS_REGION || "us-east-1",
-      this.bounceHandler,
-    );
+    this.awsEmailService = createAWSEmailService(env, this.bounceHandler);
     this.tursoClient = createTursoClient(env);
   }
 
