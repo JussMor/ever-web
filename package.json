@@ -16,6 +16,7 @@
     "@aws-sdk/client-ses": "^3.873.0",
     "@libsql/client": "^0.15.11",
     "astro": "^5.13.2",
+    "cloudflare": "^4.5.0",
     "free-astro-components": "^1.1.1",
     "three": "^0.160.0",
     "undici": "^5.28.4"
