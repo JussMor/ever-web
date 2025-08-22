@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "wrangler pages dev dist",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "deploy": "wrangler deploy",
+    "dev:wrangler": "wrangler dev"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.4",

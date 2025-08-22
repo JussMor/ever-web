@@ -1,8 +1,23 @@
 name = "ever-web"
+main = "dist/_worker.js/index.js"
 compatibility_date = "2025-04-02"
-compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env" ]
-
+compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env"]
 
 [assets]
-directory = "./dist/"
+directory = "./dist"
+binding = "ASSETS"
+
+# Environment variables for local development (add actual values to .dev.vars)
+[vars]
+AWS_REGION = "us-east-1"
+EMAIL = "contact@everfaz.com"
+
+# KV bindings (optional for sessions)
+# [[kv_namespaces]]
+# binding = "SESSION"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# Secrets should be set via: wrangler secret put VARIABLE_NAME
+# AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, TURSO_DATABASE_URL, TURSO_AUTH_TOKEN
 
