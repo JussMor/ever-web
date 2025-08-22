@@ -1,7 +1,7 @@
 name = "ever-web"
 compatibility_date = "2025-04-02"
 compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env" ]
-main = "./dist/_worker.js"
+
 
 [assets]
 directory = "./dist/"
