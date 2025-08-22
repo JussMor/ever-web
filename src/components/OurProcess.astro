@@ -1,0 +1,203 @@
+---
+const arrows = new URL("../assets/arrows.svg", import.meta.url).href;
+const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).href;
+---
+
+<section class="our-process" aria-label="Our process">
+  <div class="container">
+    <header class="process-header">
+      <div class="process-heading">
+        <p class="eyebrow">Our Process</p>
+        <h2 class="title">Move at Startup Speed</h2>
+      </div>
+
+      <p class="lead">Our 4-step process is built for momentum. We keep it lean, focused, and validation-ready so you can launch without delays.</p>
+
+      <div class="process-cta">
+        <a class="btn btn-primary cta" href="#contact">Book a slot</a>
+      </div>
+    </header>
+
+    <div class="steps">
+      <!-- Step 1 -->
+      <article class="step">
+        <div class="step-index">01</div>
+        <div class="step-body">
+          <h3 class="step-title">Initial Consultation</h3>
+          <p class="step-copy">We kick things off with a quick discovery call to understand your product idea, goals, and user needs.</p>
+        </div>
+        <div class="step-media">
+          <div class="media-card">
+            <img class="media-img" src={placeholder} alt="placeholder for consultation screens" loading="lazy" />
+            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 2 (reverse on large screens) -->
+      <article class="step reverse">
+        <div class="step-index">02</div>
+        <div class="step-body">
+          <h3 class="step-title">Strategy</h3>
+          <p class="step-copy">We map out features, prioritize what to build first, and align the roadmap around fast validation and clear outcomes.</p>
+        </div>
+        <div class="step-media">
+          <div class="media-card">
+            <img class="media-img" src={placeholder} alt="placeholder for strategy" loading="lazy" />
+            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="step">
+        <div class="step-index">03</div>
+        <div class="step-body">
+          <h3 class="step-title">Code</h3>
+          <p class="step-copy">We use industry-standard tools to write clean, scalable code faster while keeping tests and quality in mind.</p>
+        </div>
+        <div class="step-media">
+          <div class="media-card">
+            <img class="media-img" src={placeholder} alt="placeholder for code" loading="lazy" />
+            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Step 4 (reverse) -->
+      <article class="step reverse">
+        <div class="step-index">04</div>
+        <div class="step-body">
+          <h3 class="step-title">Launch</h3>
+          <p class="step-copy">Once launched, your product is ready to test with users, pitch to investors, or go to market — with support from our team along the way.</p>
+        </div>
+        <div class="step-media">
+          <div class="media-card">
+            <img class="media-img" src={placeholder} alt="placeholder for launch" loading="lazy" />
+            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.our-process) {
+    padding: 48px 20px;
+    background: linear-gradient(180deg, var(--surface) 0%, transparent 100%);
+  }
+
+  .our-process .container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .process-header {
+    display: grid;
+    grid-template-columns: minmax(180px, 420px) 1fr auto;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  .process-heading { display: flex; flex-direction: column; gap: 6px; }
+
+  .process-heading .eyebrow {
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .process-heading .title {
+    margin: 0;
+    font-size: 2.4rem;
+    line-height: 1.02;
+    color: var(--text);
+  }
+
+  .process-header .lead {
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0;
+  }
+
+  .process-cta { display: flex; justify-content: flex-end; }
+
+  .process-cta .cta { margin: 0; }
+
+  .steps { display: grid; gap: 28px; }
+
+  .step {
+    display: grid;
+    grid-template-columns: 120px 1fr 420px;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .step.reverse { grid-template-columns: 420px 1fr 120px; }
+
+  .step-index {
+    font-size: 2rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .step-body { padding: 8px 0; }
+  .step-title { margin: 0 0 8px 0; color: var(--accent); font-size: 1.25rem; }
+  .step-copy { margin: 0; color: var(--muted); }
+
+  .media-card {
+    position: relative;
+    border-radius: 48px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(121,29,219,0.06), rgba(121,29,219,0.02));
+    box-shadow: 0 20px 30px -20px rgba(17,17,17,0.15);
+    padding: 28px;
+  }
+
+  .media-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 28px;
+    max-height: 220px;
+  }
+
+  .line-graphic {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    width: calc(100% - 36px);
+    height: calc(100% - 36px);
+    opacity: 0.32;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 980px) {
+    .step { grid-template-columns: 72px 1fr; }
+    .step.reverse { grid-template-columns: 72px 1fr; }
+    .media-card { order: 3; padding: 16px; }
+    .media-img { max-height: 160px; }
+    .line-graphic { display: none; }
+
+    .process-header {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .process-cta { justify-content: flex-start; }
+  }
+
+  @media (max-width: 520px) {
+    .process-header { gap: 12px; }
+    .process-header .title { font-size: 1.5rem; }
+    .steps { gap: 20px; }
+    .media-img { max-height: 120px; }
+  }
+
+</style>

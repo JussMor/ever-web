@@ -2,6 +2,9 @@
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+import Benefits from "../components/Benefits.astro";
+import OurProcess from "../components/OurProcess.astro";
+import Pricing from "../components/Pricing.astro";
 
 import "../global.css";
 ---
@@ -38,7 +41,7 @@ import "../global.css";
             >
               <button class="btn btn-primary">Talk to Sales</button>
             </a>
-            <a href="/#our-services" style="text-decoration: none">
+            <a href="/#benefits" style="text-decoration: none">
               <button class="btn btn-secondary">Learn More</button>
             </a>
           </div>
@@ -46,6 +49,9 @@ import "../global.css";
       </div>
     </div>
   </section>
+  <Benefits />
+  <OurProcess />
+  <Pricing />
   <Footer />
 </Layout>
 

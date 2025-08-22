@@ -1,0 +1,256 @@
+---
+// @ts-nocheck
+const {
+  items = [
+    {
+      id: "speed",
+      title: "Speed to Market",
+      description:
+        "Launch your MVP in weeks, not months. Our streamlined build process prioritizes momentum without cutting corners.",
+    },
+    {
+      id: "pm",
+      title: "Project Management",
+      description:
+        "No chasing. No confusion. One team, one timeline, with updates, clarity, and momentum from start to ship.",
+    },
+    {
+      id: "pricing",
+      title: "Fixed Pricing",
+      description:
+        "No hourly surprises. Transparent pricing from day one, built for predictability and founder peace of mind.",
+    },
+  ],
+  eyebrow = "Benefits",
+  heading = "Because results matter.",
+} = Astro.props;
+
+function defaultIconSVG() {
+  return `
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <rect x="3" y="3" width="18" height="18" rx="4" fill="rgba(255,255,255,0.12)"></rect>
+      <path d="M7 12h10M7 8h10M7 16h6" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  `;
+}
+---
+
+<section id="benefits" class="benefits">
+  <div class="inner">
+    <header class="benefits-head">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="heading">{heading}</h2>
+    </header>
+
+    <div class="cards" role="list">
+      {
+        items.map((item) => (
+          <article
+            class="card"
+            role="listitem"
+            aria-labelledby={item.id ?? item.title}
+          >
+            <div class="card-decor" aria-hidden="true" />
+
+            <div class="card-top">
+              <div class="badge" aria-hidden="true">
+                <div set:html={item.icon ?? defaultIconSVG()} />
+              </div>
+            </div>
+
+            <h3 id={item.id ?? item.title} class="card-title">
+              {item.title}
+            </h3>
+            <p class="card-desc">{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- no runtime or module scripts required; helper `defaultIconSVG` is defined in frontmatter -->
+
+<style>
+  /* component-local variables to force a black pricing/benefit card in both themes */
+  :root {
+    --card-radius: 14px;
+    --pricing-card-bg: #000000; /* forced black */
+    --pricing-card-text: #ffffff; /* title / primary text */
+    --pricing-card-muted: rgba(255,255,255,0.72); /* description */
+    --pricing-card-border: rgba(255,255,255,0.06); /* subtle border on black */
+    --pricing-card-highlight: rgba(255,255,255,0.04); /* inner highlight */
+  }
+
+  .benefits {
+    padding: 48px 20px;
+    background: transparent;
+    color: var(--text);
+  }
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .benefits-head {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .heading {
+    margin: 0;
+    font-size: 56px;
+    line-height: 0.95;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .heading {
+      font-size: 40px;
+    }
+    .benefits-head {
+      margin-bottom: 32px;
+    }
+  }
+
+  .cards {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+
+  @media (max-width: 900px) {
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .card {
+    position: relative;
+    overflow: hidden;
+    background: var(--pricing-card-bg);
+    border: 1px solid var(--pricing-card-border);
+    border-radius: var(--card-radius);
+    padding: 32px 28px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.48);
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  }
+
+  /* Decorative top area: keep original visual, but reduce white overlays to suit black bg */
+  .card-decor {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 45%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent) 8%, transparent),
+        transparent 70%
+      ),
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 24px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.01) 0px,
+        rgba(255, 255, 255, 0.01) 1px,
+        transparent 1px,
+        transparent 32px
+      );
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    border-radius: var(--card-radius) var(--card-radius) 0 0;
+  }
+
+  /* Subtle inner highlight tailored for dark surface */
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 1px 0 var(--pricing-card-highlight);
+  }
+
+  .card-top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      color-mix(in srgb, var(--accent) 5%, transparent)
+    );
+    box-shadow:
+      0 8px 25px rgba(0,0,0,0.48),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    z-index: 3;
+  }
+
+  .badge svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--pricing-card-text);
+    opacity: 0.9;
+  }
+
+  .card-title {
+    position: relative;
+    z-index: 3;
+    margin: 0 0 12px;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--pricing-card-text);
+  }
+
+  .card-desc {
+    position: relative;
+    z-index: 3;
+    margin: 0;
+    color: var(--pricing-card-muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+</style>
