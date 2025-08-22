@@ -171,9 +171,9 @@ export class AWSEmailService {
         // Add compliance data to template
         const templateDataWithCompliance = {
           ...params.templateData,
-          unsubscribeUrl: `https://everfaz.com/unsubscribe?email=${encodeURIComponent(contact.email)}`,
+          unsubscribeUrl: `https://www.everfaz.com/unsubscribe?email=${encodeURIComponent(contact.email)}`,
           companyName: "Everfaz",
-          companyAddress: "Your Business Address Here",
+          companyAddress: "30 N Gould St Ste N, Sheridan, WY 82801 USA",
           consentReminder: `You received this email because you opted in on ${contact.consentDate.toLocaleDateString()} from ${contact.source}.`,
         };
 
