@@ -21,7 +21,7 @@ if (typeof document !== 'undefined') {
     if (!form) return;
 
     // Import blocked emails list (only on client side)
-    const { blockedEmailsDomains } = await import('../../constants/block-mails');
+    const { blockedEmailsDomains } = await import('../constants/block-mails');
     
     // Function to check if email domain is blocked
     function isEmailBlocked(email: string): boolean {

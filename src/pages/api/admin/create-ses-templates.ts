@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import {
   CreateTemplateCommand,
   GetTemplateCommand,
@@ -5,8 +7,6 @@ import {
 } from "@aws-sdk/client-ses";
 import type { APIRoute } from "astro";
 import { createAWSEmailService } from "../../../lib/aws-ses.js";
-
-export const prerender = false;
 
 /**
  * Admin endpoint to create/update SES email templates
