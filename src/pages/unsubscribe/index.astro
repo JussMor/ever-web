@@ -1,154 +1,351 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../global.css";
 
 const url = Astro.url;
-const email = url.searchParams.get('email') || '';
-const success = url.searchParams.get('success') === 'true';
+const email = url.searchParams.get("email") || "";
+const success = url.searchParams.get("success") === "true";
 ---
 
 <Layout title="Unsubscribe - Everfaz">
-  <main class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">
-          {success ? 'Unsubscribed Successfully' : 'Unsubscribe from Emails'}
+  <Navbar />
+  <main class="unsubscribe-page">
+    <div class="container">
+      <div class="heading">
+        <h1 class="title">
+          {success ? "Unsubscribed Successfully" : "Unsubscribe from Emails"}
         </h1>
-        
-        {success ? (
-          <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-            <div class="flex items-center">
-              <svg class="h-8 w-8 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <div class="text-left">
-                <h3 class="text-lg font-medium text-green-900 mb-1">
-                  You've been unsubscribed
-                </h3>
-                <p class="text-green-700 text-sm">
-                  {email && `The email address ${email} has been`} removed from all our mailing lists.
-                </p>
+
+        {
+          success ? (
+            <div class="banner success-banner">
+              <div class="banner-inner">
+                <svg
+                  class="icon success-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <div class="banner-text">
+                  <h3 class="banner-title">You've been unsubscribed</h3>
+                  <p class="banner-sub">
+                    {email && `The email address ${email} has been`} removed
+                    from all our mailing lists.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <p class="text-gray-600 mb-8">
-            We're sorry to see you go. Enter your email address below to unsubscribe from all future emails.
-          </p>
-        )}
+          ) : (
+            <p class="lead">
+              We're sorry to see you go. Enter your email address below to
+              unsubscribe from all future emails.
+            </p>
+          )
+        }
       </div>
     </div>
 
-    {!success && (
-      <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-6 shadow-lg rounded-lg sm:px-10">
-          <form id="unsubscribe-form" method="POST" action="/api/unsubscribe">
-            <div class="mb-6">
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                value={email}
-                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter your email address"
-              />
-            </div>
+    {
+      !success && (
+        <div class="container">
+          <div class="card">
+            <form id="unsubscribe-form" method="POST" action="/api/unsubscribe">
+              <div class="form-group">
+                <label for="email" class="label">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  value={email}
+                  class="input"
+                  placeholder="Enter your email address"
+                />
+              </div>
 
-            <div class="mb-6">
-              <button
-                type="submit"
-                class="w-full bg-red-600 text-white py-2 px-4 rounded-md font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200"
-              >
-                Unsubscribe
-              </button>
-            </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger">
+                  Unsubscribe
+                </button>
+              </div>
 
-            <div class="text-xs text-gray-500 text-center">
-              <p class="mb-2">
-                By clicking "Unsubscribe", you will no longer receive marketing emails from Everfaz.
-                You may still receive important transactional emails related to your account or services.
-              </p>
-            </div>
-          </form>
+              <div class="muted small center">
+                <p>
+                  By clicking "Unsubscribe", you will no longer receive
+                  marketing emails from Everfaz. You may still receive important
+                  transactional emails related to your account or services.
+                </p>
+              </div>
+            </form>
 
-          <div id="message" class="hidden mt-4 p-4 rounded-md"></div>
+            <div
+              id="message"
+              class="message hidden"
+              role="status"
+              aria-live="polite"
+            />
+          </div>
         </div>
-      </div>
-    )}
+      )
+    }
 
-    <div class="sm:mx-auto sm:w-full sm:max-w-md mt-8 text-center">
-      <p class="text-sm text-gray-500 mb-4">
-        Change your mind? You can always 
-        <a href="/contact" class="text-blue-600 hover:text-blue-500 font-medium">contact us</a>
-        to resubscribe.
+    <div class="container small center mt">
+      <p class="muted">
+        Change your mind? You can always <a href="/contact" class="link"
+          >contact us</a
+        > to resubscribe.
       </p>
-      
-      <div class="bg-gray-100 rounded-lg p-6 text-left">
-        <h3 class="font-semibold text-gray-900 mb-3">Our Email Commitment:</h3>
-        <ul class="text-sm text-gray-600 space-y-2">
-          <li class="flex items-start">
-            <span class="text-green-500 mr-2">✓</span>
-            We only send emails to people who have explicitly opted in
+
+      <div class="commitment card muted-block">
+        <h3 class="commitment-title">Our Email Commitment:</h3>
+        <ul class="commitment-list">
+          <li>
+            <span class="tick">✓</span> We only send emails to people who have explicitly
+            opted in
           </li>
-          <li class="flex items-start">
-            <span class="text-green-500 mr-2">✓</span>
-            We comply with the AWS Acceptable Use Policy
+          <li>
+            <span class="tick">✓</span> We comply with the AWS Acceptable Use Policy
           </li>
-          <li class="flex items-start">
-            <span class="text-green-500 mr-2">✓</span>
-            We maintain proper bounce and complaint handling
+          <li>
+            <span class="tick">✓</span> We maintain proper bounce and complaint handling
           </li>
-          <li class="flex items-start">
-            <span class="text-green-500 mr-2">✓</span>
-            We respect your privacy and email preferences
+          <li>
+            <span class="tick">✓</span> We respect your privacy and email preferences
           </li>
         </ul>
       </div>
     </div>
   </main>
 
-  <script>
-    const unsubForm = document.getElementById('unsubscribe-form');
-    if (unsubForm) {
-      unsubForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const form = e.target;
-        if (!form || !(form instanceof HTMLFormElement)) return;
-        
-        const formData = new FormData(form);
-        const messageDiv = document.getElementById('message');
-        if (!messageDiv) return;
-        
-        try {
-          const response = await fetch('/api/unsubscribe', {
-            method: 'POST',
-            body: formData
-          });
-          
-          const result = await response.json();
-          
-          if (result.success) {
-            messageDiv.className = 'mt-4 p-4 rounded-md bg-green-50 border border-green-200 text-green-800';
-            messageDiv.textContent = 'Successfully unsubscribed! You will no longer receive emails from us.';
-            messageDiv.classList.remove('hidden');
-            
-            // Hide the form
-            form.style.display = 'none';
-          } else {
-            messageDiv.className = 'mt-4 p-4 rounded-md bg-red-50 border border-red-200 text-red-800';
-            messageDiv.textContent = result.error || 'Failed to unsubscribe. Please try again.';
-            messageDiv.classList.remove('hidden');
-          }
-        } catch (error) {
-          messageDiv.className = 'mt-4 p-4 rounded-md bg-red-50 border border-red-200 text-red-800';
-          messageDiv.textContent = 'An error occurred. Please try again.';
-          messageDiv.classList.remove('hidden');
-        }
-      });
-    }
-  </script>
+  <Footer />
 </Layout>
+
+<script>
+  const unsubForm = document.getElementById("unsubscribe-form");
+  if (unsubForm) {
+    unsubForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form || !(form instanceof HTMLFormElement)) return;
+      const formData = new FormData(form);
+      const messageDiv = document.getElementById("message");
+      if (!messageDiv) return;
+
+      try {
+        const response = await fetch("/api/unsubscribe", {
+          method: "POST",
+          body: formData,
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          messageDiv.className = "message success";
+          messageDiv.textContent =
+            "Successfully unsubscribed! You will no longer receive emails from us.";
+          messageDiv.classList.remove("hidden");
+          form.style.display = "none";
+        } else {
+          messageDiv.className = "message error";
+          messageDiv.textContent =
+            result.error || "Failed to unsubscribe. Please try again.";
+          messageDiv.classList.remove("hidden");
+        }
+      } catch (error) {
+        messageDiv.className = "message error";
+        messageDiv.textContent = "An error occurred. Please try again.";
+        messageDiv.classList.remove("hidden");
+      }
+    });
+  }
+</script>
+
+<style>
+  .unsubscribe-page {
+    min-height: 100vh;
+    background: var(--surface);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+  .container {
+    max-width: 520px;
+    margin: 0 auto 0;
+    width: 100%;
+  }
+  .heading {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+  .lead {
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--border);
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .small {
+    font-size: 13px;
+  }
+  .center {
+    text-align: center;
+  }
+  .mt {
+    margin-top: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 15px;
+    background: var(--input-bg);
+    color: var(--text);
+  }
+  .input::placeholder {
+    color: var(--placeholder);
+  }
+  .input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+    border-color: var(--input-border-focus);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-danger {
+    width: 100%;
+    background: var(--error);
+    color: var(--primary-contrast);
+  }
+  .btn-danger:hover {
+    filter: brightness(0.92);
+  }
+
+  .link {
+    color: var(--link);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .link:hover {
+    color: var(--link-hover);
+  }
+
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0 18px;
+  }
+  .banner-inner {
+    display: flex;
+    align-items: center;
+  }
+  .success-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent);
+    margin-right: 12px;
+  }
+  .banner-title {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-size: 16px;
+  }
+  .banner-sub {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .message {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    display: block;
+  }
+  .message.hidden {
+    display: none;
+  }
+  .message.success {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .message.error {
+    background: color-mix(in srgb, var(--error) 8%, transparent);
+    border: 1px solid var(--border);
+    color: var(--error);
+  }
+
+  .muted-block {
+    background: var(--surface);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 12px;
+    border: 1px solid var(--border);
+  }
+  .commitment-title {
+    margin: 0 0 10px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .commitment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--muted);
+  }
+  .commitment-list li {
+    margin-bottom: 8px;
+  }
+  .tick {
+    color: var(--accent);
+    margin-right: 8px;
+    font-weight: 700;
+  }
+</style>
