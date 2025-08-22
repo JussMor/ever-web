@@ -2,9 +2,9 @@
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
-// import Benefits from "../components/Benefits.astro";
-// import OurProcess from "../components/OurProcess.astro";
-// import Pricing from "../components/Pricing.astro";
+import Benefits from "../components/Benefits.astro";
+import OurProcess from "../components/OurProcess.astro";
+import Pricing from "../components/Pricing.astro";
 
 import "../global.css";
 ---
@@ -49,9 +49,9 @@ import "../global.css";
       </div>
     </div>
   </section>
-  <!-- <Benefits />
+  <Benefits />
   <OurProcess />
-  <Pricing /> -->
+  <Pricing />
   <Footer />
 </Layout>
 
@@ -87,11 +87,8 @@ import "../global.css";
 
   .background {
     position: relative; /* containing block for ::after overlay */
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.9) 40%,
-        rgba(0, 0, 0, 0.4) 90%
-      ),
+    background-image:
+      linear-gradient(to top, rgba(0, 0, 0, 0.9) 40%, rgba(0, 0, 0, 0.4) 90%),
       url("../assets/backgroundHome.webp");
     background-size: cover;
     background-repeat: no-repeat;

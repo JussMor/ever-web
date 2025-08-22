@@ -1,6 +1,6 @@
 ---
-const arrows = new URL("../assets/arrows.svg", import.meta.url).href;
-const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).href;
+import arrows from "../assets/arrows.svg";
+import placeholder from "../assets/backgroundHome.webp";
 ---
 
 <section class="our-process" aria-label="Our process">
@@ -28,8 +28,8 @@ const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).hr
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder} alt="placeholder for consultation screens" loading="lazy" />
-            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+            <img class="media-img" src={placeholder.src} alt="placeholder for consultation screens" loading="lazy" />
+            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
           </div>
         </div>
       </article>
@@ -43,8 +43,8 @@ const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).hr
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder} alt="placeholder for strategy" loading="lazy" />
-            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+            <img class="media-img" src={placeholder.src} alt="placeholder for strategy" loading="lazy" />
+            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
           </div>
         </div>
       </article>
@@ -58,8 +58,8 @@ const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).hr
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder} alt="placeholder for code" loading="lazy" />
-            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+            <img class="media-img" src={placeholder.src} alt="placeholder for code" loading="lazy" />
+            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
           </div>
         </div>
       </article>
@@ -73,8 +73,8 @@ const placeholder = new URL("../assets/backgroundHome.webp", import.meta.url).hr
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder} alt="placeholder for launch" loading="lazy" />
-            <img class="line-graphic" src={arrows} alt="decorative process line" aria-hidden="true" />
+            <img class="media-img" src={placeholder.src} alt="placeholder for launch" loading="lazy" />
+            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
           </div>
         </div>
       </article>
