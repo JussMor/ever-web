@@ -1,6 +1,11 @@
 name = "ever-web"
-compatibility_date = "2025-04-02"
+main = "./dist/_worker.js/index.js"
+compatibility_date = "2025-03-25"
 compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env"]
 
 [assets]
+binding = "ASSETS"
 directory = "./dist"
+
+[observability]
+enabled = true
