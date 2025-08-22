@@ -4,3 +4,16 @@ compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env" ]
 
 [assets]
 directory = "./dist/"
+
+# Environment variables for local development (add actual values to .dev.vars)
+[vars]
+AWS_REGION = "us-east-1"
+EMAIL = "contact@everfaz.com"
+
+
+
+# For production, these should be set in Cloudflare Pages dashboard
+# [env.production.vars]
+# AWS_ACCESS_KEY_ID = "your-production-key"
+# AWS_SECRET_ACCESS_KEY = "your-production-secret"
+# etc...

@@ -16,8 +16,10 @@ export class EmailService {
   private awsEmailService: AWSEmailService;
   private bounceHandler: BounceComplaintHandler;
   private tursoClient: ReturnType<typeof createTursoClient>;
+  private env?: any;
 
   constructor(env?: any) {
+    this.env = env;
     this.bounceHandler = new BounceComplaintHandler(env);
     this.awsEmailService = createAWSEmailService(env, this.bounceHandler);
     this.tursoClient = createTursoClient(env);
@@ -181,7 +183,11 @@ export class EmailService {
       // Send email via AWS SES
       const success = await this.awsEmailService.sendTemplatedEmail({
         to: recipients,
-        from: params.from || import.meta.env.EMAIL || "contact@everfaz.com",
+        from:
+          params.from ||
+          this.env?.EMAIL ||
+          import.meta.env.EMAIL ||
+          "contact@everfaz.com",
         templateName: template.name, // Use the actual SES template name from manifest
         templateData: {
           ...params.templateData,

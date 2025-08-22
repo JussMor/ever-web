@@ -315,6 +315,16 @@ export function createAWSEmailService(
     env?.AWS_SECRET_ACCESS_KEY || import.meta.env.AWS_SECRET_ACCESS_KEY || "";
   const region = env?.AWS_REGION || import.meta.env.AWS_REGION || "us-east-1";
 
+  // Validate required AWS credentials
+  if (!accessKeyId || !secretAccessKey) {
+    console.error("Missing AWS credentials:", {
+      hasAccessKey: !!accessKeyId,
+      hasSecretKey: !!secretAccessKey,
+      region,
+    });
+    throw new Error("AWS credentials are required for email service");
+  }
+
   // Use provided bounce handler or create default one
   const handler = bounceHandler || new DefaultBounceComplaintHandler();
 

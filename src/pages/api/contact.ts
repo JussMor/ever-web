@@ -3,12 +3,25 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { createEmailService } from "../../lib/email-service";
 import { createTursoClient } from "../../lib/turso";
+import type { CloudflareLocals } from "../../types/cloudflare";
 import type { ContactResponse, ContactSubmission } from "../../types/contact";
 
 export const POST: APIRoute = async ({ request, locals }) => {
   try {
     // Get env from locals (Cloudflare Pages v2) or fall back to import.meta.env for dev
-    const env = (locals as any).runtime?.env;
+    const env = (locals as CloudflareLocals)?.runtime?.env;
+
+    // Debug logging for environment variables (remove in production)
+    console.log("Environment check:", {
+      hasEnv: !!env,
+      hasAWSKey: !!(
+        env?.AWS_ACCESS_KEY_ID || import.meta.env.AWS_ACCESS_KEY_ID
+      ),
+      hasTursoUrl: !!(
+        env?.TURSO_DATABASE_URL || import.meta.env.TURSO_DATABASE_URL
+      ),
+      envKeys: env ? Object.keys(env) : "no env object",
+    });
 
     // Create Turso client (works in both dev and production)
     const turso = createTursoClient(env);
