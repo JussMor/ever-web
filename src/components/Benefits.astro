@@ -1,29 +1,37 @@
 ---
 // @ts-nocheck
+import { DollarSign, Magnet, Rocket } from "@lucide/astro";
+
 const {
-  items = [
+  items = /** @type {any[]} */ ([
     {
       id: "speed",
       title: "Speed to Market",
       description:
         "Launch your MVP in weeks, not months. Our streamlined build process prioritizes momentum without cutting corners.",
+      icon: Rocket,
     },
     {
       id: "pm",
       title: "Project Management",
       description:
         "No chasing. No confusion. One team, one timeline, with updates, clarity, and momentum from start to ship.",
+      icon: Magnet,
     },
     {
       id: "pricing",
       title: "Fixed Pricing",
       description:
         "No hourly surprises. Transparent pricing from day one, built for predictability and founder peace of mind.",
+      icon: DollarSign,
     },
-  ],
+  ]),
   eyebrow = "Benefits",
   heading = "Because results matter.",
 } = Astro.props;
+
+// local typed alias to avoid implicit-any in JSX map callbacks
+const itemsLocal = /** @type {any[]} */ (items);
 
 function defaultIconSVG() {
   return `
@@ -44,44 +52,39 @@ function defaultIconSVG() {
 
     <div class="cards" role="list">
       {
-        items.map((item) => (
-          <article
-            class="card"
-            role="listitem"
-            aria-labelledby={item.id ?? item.title}
-          >
-            <div class="card-decor" aria-hidden="true" />
+          itemsLocal.map((item) => (
+            <article
+              class="card"
+              role="listitem"
+              aria-labelledby={item.id ?? item.title}
+            >
+              <div class="card-decor" aria-hidden="true" />
 
-            <div class="card-top">
-              <div class="badge" aria-hidden="true">
-                <div set:html={item.icon ?? defaultIconSVG()} />
+              <div class="card-top">
+                <div class="badge" aria-hidden="true">
+                  {
+                    item.icon
+                      ? (typeof item.icon === 'string'
+                          ? <div set:html={item.icon} />
+                          : (() => { const IconComp = item.icon; return <IconComp /> })()
+                        )
+                      : <Rocket />
+                  }
+                </div>
               </div>
-            </div>
 
-            <h3 id={item.id ?? item.title} class="card-title">
-              {item.title}
-            </h3>
-            <p class="card-desc">{item.description}</p>
-          </article>
+              <h3 id={item.id ?? item.title} class="card-title">
+                {item.title}
+              </h3>
+              <p class="card-desc">{item.description}</p>
+            </article>
         ))
       }
     </div>
   </div>
 </section>
 
-<!-- no runtime or module scripts required; helper `defaultIconSVG` is defined in frontmatter -->
-
 <style>
-  /* component-local variables to force a black pricing/benefit card in both themes */
-  :root {
-    --card-radius: 14px;
-    --pricing-card-bg: #000000; /* forced black */
-    --pricing-card-text: #ffffff; /* title / primary text */
-    --pricing-card-muted: rgba(255,255,255,0.72); /* description */
-    --pricing-card-border: rgba(255,255,255,0.06); /* subtle border on black */
-    --pricing-card-highlight: rgba(255,255,255,0.04); /* inner highlight */
-  }
-
   .benefits {
     padding: 48px 20px;
     background: transparent;
@@ -141,11 +144,11 @@ function defaultIconSVG() {
   .card {
     position: relative;
     overflow: hidden;
-    background: var(--pricing-card-bg);
-    border: 1px solid var(--pricing-card-border);
-    border-radius: var(--card-radius);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 32px 28px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.48);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     min-height: 240px;
     display: flex;
     flex-direction: column;
@@ -157,7 +160,7 @@ function defaultIconSVG() {
 
   .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
   }
 
   /* Decorative top area: keep original visual, but reduce white overlays to suit black bg */
@@ -188,7 +191,7 @@ function defaultIconSVG() {
       );
     mix-blend-mode: overlay;
     opacity: 0.6;
-    border-radius: var(--card-radius) var(--card-radius) 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
   }
 
   /* Subtle inner highlight tailored for dark surface */
@@ -198,7 +201,7 @@ function defaultIconSVG() {
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow: inset 0 1px 0 var(--pricing-card-highlight);
+    box-shadow: inset 0 1px 0 var(--highlight);
   }
 
   .card-top {
@@ -223,7 +226,7 @@ function defaultIconSVG() {
       color-mix(in srgb, var(--accent) 5%, transparent)
     );
     box-shadow:
-      0 8px 25px rgba(0,0,0,0.48),
+      0 8px 25px rgba(0, 0, 0, 0.28),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
     z-index: 3;
   }
@@ -231,8 +234,16 @@ function defaultIconSVG() {
   .badge svg {
     width: 28px;
     height: 28px;
-    fill: var(--pricing-card-text);
+  fill: var(--text);
+  stroke: var(--text);
     opacity: 0.9;
+  }
+
+  /* ensure lucide icons stroke thickness and caps match original visuals */
+  .badge svg {
+    stroke-width: 1.6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .card-title {
@@ -242,14 +253,14 @@ function defaultIconSVG() {
     font-size: 24px;
     line-height: 1.2;
     font-weight: 700;
-    color: var(--pricing-card-text);
+    color: var(--text);
   }
 
   .card-desc {
     position: relative;
     z-index: 3;
     margin: 0;
-    color: var(--pricing-card-muted);
+    color: var(--muted);
     font-size: 15px;
     line-height: 1.6;
   }

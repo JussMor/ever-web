@@ -1244,6 +1244,11 @@
   resolved "https://registry.yarnpkg.com/@libsql/win32-x64-msvc/-/win32-x64-msvc-0.5.17.tgz#1c3c281bc8a4d1a71e907fa9a340b11ada6b7d23"
   integrity sha512-f5bGH8+3A5sn6Lrqg8FsQ09a1pYXPnKGXGTFiAYlfQXVst1tUTxDTugnuWcJYKXyzDe/T7ccxyIZXeSmPOhq8A==
 
+"@lucide/astro@^0.541.0":
+  version "0.541.0"
+  resolved "https://registry.yarnpkg.com/@lucide/astro/-/astro-0.541.0.tgz#b83ec7a183dcb27ce6e6e534f42cc6ba258f47e4"
+  integrity sha512-12n6tMk7qKYOx+5dKdDuzyLnvXgXicrer+LRiKSrrnt8xTBuoc0BDnDZ+ZceAUL65726WwW09G0VPXTxtoSWXQ==
+
 "@neon-rs/load@^0.0.4":
   version "0.0.4"
   resolved "https://registry.npmjs.org/@neon-rs/load/-/load-0.0.4.tgz"
