@@ -281,7 +281,7 @@ class HeroSketch {
 
 // Safe boot
 const boot = () => {
-  console.log('🚀 Initializing Hero3D...');
+  // console.log('🚀 Initializing Hero3D...');
   const container = (document.getElementById('hero-canvas') as HTMLElement | null)
     || (document.querySelector('.hero-canvas') as HTMLElement | null)
     || (document.getElementById('hero') as HTMLElement | null);
@@ -290,7 +290,7 @@ const boot = () => {
     return;
   }
   try {
-    console.log('✅ Found hero container:', container);
+    // console.log('✅ Found hero container:', container);
     new HeroSketch({ domElement: container });
   } catch (e) {
     console.warn('Hero3D: initialization failed', e);
