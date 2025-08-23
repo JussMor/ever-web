@@ -88,6 +88,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
       console.log(
         `Contact confirmation email ${emailSent ? "sent" : "failed"} for ${body.email}`,
       );
+      // Send internal notification to site owner about the new lead
+      try {
+        const adminNotify = await emailService.sendTemplatedEmail({
+          to: "moreiral468@gmail.com",
+          templateName: "contactConfirmation",
+          templateData: {
+            name: fullName,
+            email: body.email,
+            subject: `New lead via website: ${body.firstName} ${body.lastName} (${body.email})`,
+            submissionDate: new Date().toLocaleString(),
+          },
+        });
+
+        console.log(
+          `Admin notification ${adminNotify.success ? "sent" : "failed"} to moreiral468@gmail.com`,
+          adminNotify.errors || [],
+        );
+      } catch (notifyErr) {
+        console.error("Failed to send admin notification email:", notifyErr);
+      }
     } catch (emailError) {
       console.error("Failed to send confirmation email:", emailError);
       // Don't fail the whole request if email fails
