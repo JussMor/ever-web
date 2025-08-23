@@ -1,6 +1,10 @@
 ---
 import arrows from "../assets/arrows.svg";
 import placeholder from "../assets/backgroundHome.webp";
+import initialMeeting from "../assets/initialMeeting.webp";
+import coding from "../assets/coding.webp";
+import launch from "../assets/launch.webp";
+import strategy from "../assets/strategy.png";
 ---
 
 <section class="our-process" aria-label="Our process">
@@ -11,70 +15,130 @@ import placeholder from "../assets/backgroundHome.webp";
         <h2 class="title">Move at Startup Speed</h2>
       </div>
 
-      <p class="lead">Our 4-step process is built for momentum. We keep it lean, focused, and validation-ready so you can launch without delays.</p>
+      <div class="process-description">
+        <p class="lead">
+          Our 4-step process is built for momentum. We keep it lean, focused,
+          and validation-ready so you can launch without delays.
+        </p>
 
-      <div class="process-cta">
-        <a class="btn btn-primary cta" href="#contact">Book a slot</a>
+        <div class="process-cta">
+          <a class="btn btn-primary cta" href="https://cal.com/everfaz/20min"
+            >Launch in 21 Days</a
+          >
+        </div>
       </div>
     </header>
 
     <div class="steps">
       <!-- Step 1 -->
       <article class="step">
-        <div class="step-index">01</div>
+        <div class="step-index" aria-hidden="true">01</div>
         <div class="step-body">
           <h3 class="step-title">Initial Consultation</h3>
-          <p class="step-copy">We kick things off with a quick discovery call to understand your product idea, goals, and user needs.</p>
+          <p class="step-copy">
+            We kick things off with a quick discovery call to understand your
+            product idea, goals, and user needs.
+          </p>
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder.src} alt="placeholder for consultation screens" loading="lazy" />
-            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
+            <img
+              class="media-img"
+              src={initialMeeting.src}
+              alt="placeholder for consultation screens"
+              loading="lazy"
+            />
+            <img
+              class="line-graphic"
+              src={arrows.src}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
         </div>
       </article>
 
-      <!-- Step 2 (reverse on large screens) -->
+      <!-- Step 2 -->
       <article class="step reverse">
-        <div class="step-index">02</div>
+        <div class="step-index" aria-hidden="true">02</div>
         <div class="step-body">
           <h3 class="step-title">Strategy</h3>
-          <p class="step-copy">We map out features, prioritize what to build first, and align the roadmap around fast validation and clear outcomes.</p>
+          <p class="step-copy">
+            We map out features, prioritize what to build first, and align the
+            roadmap around fast validation and clear outcomes.
+          </p>
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder.src} alt="placeholder for strategy" loading="lazy" />
-            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
+            <img
+              class="media-img"
+              src={strategy.src}
+              alt="placeholder for strategy"
+              loading="lazy"
+            />
+            <img
+              class="line-graphic"
+              src={arrows.src}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
         </div>
       </article>
 
       <!-- Step 3 -->
       <article class="step">
-        <div class="step-index">03</div>
+        <div class="step-index" aria-hidden="true">03</div>
         <div class="step-body">
           <h3 class="step-title">Code</h3>
-          <p class="step-copy">We use industry-standard tools to write clean, scalable code faster while keeping tests and quality in mind.</p>
+          <p class="step-copy">
+            We use industry-standard tools to write clean, scalable code faster
+            while keeping tests and quality in mind.
+          </p>
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder.src} alt="placeholder for code" loading="lazy" />
-            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
+            <img
+              class="media-img"
+              src={coding.src}
+              alt="placeholder for code"
+              loading="lazy"
+            />
+            <img
+              class="line-graphic"
+              src={arrows.src}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
         </div>
       </article>
 
-      <!-- Step 4 (reverse) -->
+      <!-- Step 4 -->
       <article class="step reverse">
-        <div class="step-index">04</div>
+        <div class="step-index" aria-hidden="true">04</div>
         <div class="step-body">
           <h3 class="step-title">Launch</h3>
-          <p class="step-copy">Once launched, your product is ready to test with users, pitch to investors, or go to market — with support from our team along the way.</p>
+          <p class="step-copy">
+            Once launched, your product is ready to test with users, pitch to
+            investors, or go to market — with support from our team along the
+            way.
+          </p>
         </div>
         <div class="step-media">
           <div class="media-card">
-            <img class="media-img" src={placeholder.src} alt="placeholder for launch" loading="lazy" />
-            <img class="line-graphic" src={arrows.src} alt="decorative process line" aria-hidden="true" />
+            <img
+              class="media-img"
+              src={launch.src}
+              alt="placeholder for launch"
+              loading="lazy"
+            />
+            <img
+              class="line-graphic"
+              src={arrows.src}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
         </div>
       </article>
@@ -83,11 +147,20 @@ import placeholder from "../assets/backgroundHome.webp";
 </section>
 
 <style>
-  :global(.our-process) {
-    padding: 48px 20px;
-    background: linear-gradient(180deg, var(--surface) 0%, transparent 100%);
+  /* ---- tokens for consistent mirroring ---- */
+  .our-process {
+    --col-index: 120px;
+  /* reduced media column so images appear smaller on wide layouts */
+  --col-media: 420px;
+    --gap-col: 24px;
+    --chip-size: 48px;
   }
 
+  /* ---- section scaffold ---- */
+  :global(.our-process) {
+    padding: clamp(32px, 4vw, 56px) 20px;
+    background: linear-gradient(180deg, var(--surface) 0%, transparent 100%);
+  }
   .our-process .container {
     max-width: 1180px;
     margin: 0 auto;
@@ -95,109 +168,203 @@ import placeholder from "../assets/backgroundHome.webp";
 
   .process-header {
     display: grid;
-    grid-template-columns: minmax(180px, 420px) 1fr auto;
-    gap: 28px;
-    align-items: center;
-    margin-bottom: 36px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: clamp(20px, 4vw, 40px);
   }
-
-  .process-heading { display: flex; flex-direction: column; gap: 6px; }
-
-  .process-heading .eyebrow {
-    color: var(--muted);
-    font-weight: 600;
+  .process-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .eyebrow {
     margin: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--muted);
   }
-
   .process-heading .title {
     margin: 0;
-    font-size: 2.4rem;
-    line-height: 1.02;
+    font-size: clamp(1.6rem, 1.4rem + 1.8vw, 2.6rem);
+    line-height: 1.04;
     color: var(--text);
   }
-
   .process-header .lead {
-    color: var(--muted);
-    max-width: 720px;
     margin: 0;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+  .process-cta {
+    margin-top: 12px;
   }
 
-  .process-cta { display: flex; justify-content: flex-end; }
+  /* ---- steps base (mobile) ---- */
+  .steps {
+    display: grid;
+    row-gap: clamp(28px, 5vw, 64px);
+  }
 
-  .process-cta .cta { margin: 0; }
-
-  .steps { display: grid; gap: 28px; }
-
+  /* Row 1: index | text ; Row 2: image full width */
   .step {
     display: grid;
-    grid-template-columns: 120px 1fr 420px;
-    align-items: center;
-    gap: 20px;
+    grid-template-columns: 64px 1fr;
+    grid-template-areas:
+      "index body"
+      "media media";
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: start;
+    padding-block: 8px;
   }
 
-  .step.reverse { grid-template-columns: 420px 1fr 120px; }
-
+  /* PERFECTLY CENTERED CHIP */
   .step-index {
-    font-size: 2rem;
+    grid-area: index;
+    /* use physical sizes for Safari centering reliability */
+    width: var(--chip-size);
+    height: var(--chip-size);
+
+    display: inline-flex; /* ← reliable across browsers */
+    align-items: center; /* vertical center */
+    justify-content: center; /* horizontal center */
+    line-height: 1; /* kill font baseline bias */
+    text-align: center;
+
+    border-radius: 14px;
+    background: linear-gradient(
+      180deg,
+      rgba(121, 29, 219, 0.12),
+      rgba(121, 29, 219, 0.04)
+    );
+    border: 1px solid rgba(121, 29, 219, 0.15);
     color: var(--muted);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1rem;
+    /* Use tabular numerals to keep digits optically centered */
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    box-shadow: 0 8px 18px -12px rgba(17, 17, 17, 0.25) inset;
   }
 
-  .step-body { padding: 8px 0; }
-  .step-title { margin: 0 0 8px 0; color: var(--accent); font-size: 1.25rem; }
-  .step-copy { margin: 0; color: var(--muted); }
+  .step-body {
+    grid-area: body;
+    padding-top: 2px;
+  }
+  .step-title {
+    margin: 0 0 6px;
+    color: var(--accent);
+    font-size: clamp(1.05rem, 0.6vw + 0.95rem, 1.25rem);
+  }
+  .step-copy {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 70ch;
+  }
 
+  .step-media {
+    grid-area: media;
+    margin-top: 6px;
+  }
   .media-card {
     position: relative;
-    border-radius: 48px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 28px;
     overflow: hidden;
-    background: linear-gradient(180deg, rgba(121,29,219,0.06), rgba(121,29,219,0.02));
-    box-shadow: 0 20px 30px -20px rgba(17,17,17,0.15);
-    padding: 28px;
+    background: linear-gradient(
+      180deg,
+      rgba(121, 29, 219, 0.06),
+      rgba(121, 29, 219, 0.02)
+    );
+    box-shadow: 0 20px 30px -20px rgba(17, 17, 17, 0.15);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .media-card:hover,
+  .media-card:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 26px 40px -24px rgba(17, 17, 17, 0.22);
   }
 
   .media-img {
-    display: block;
     width: 100%;
     height: auto;
+    border-radius: 18px;
     object-fit: cover;
-    border-radius: 28px;
-    max-height: 220px;
+    aspect-ratio: 16 / 9;
   }
-
   .line-graphic {
     position: absolute;
-    right: 18px;
-    top: 18px;
-    width: calc(100% - 36px);
-    height: calc(100% - 36px);
-    opacity: 0.32;
+    inset: 12px;
+    opacity: 0.28;
     pointer-events: none;
     mix-blend-mode: multiply;
   }
 
-  /* Responsive adjustments */
-  @media (max-width: 980px) {
-    .step { grid-template-columns: 72px 1fr; }
-    .step.reverse { grid-template-columns: 72px 1fr; }
-    .media-card { order: 3; padding: 16px; }
-    .media-img { max-height: 160px; }
-    .line-graphic { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .media-card {
+      transition: none;
+    }
+    .media-card:hover,
+    .media-card:focus-within {
+      transform: none;
+    }
+  }
 
+  /* ---- tablet & up (true 3-col, perfectly mirrored) ---- */
+  @media (min-width: 720px) {
     .process-header {
-      grid-template-columns: 1fr;
-      gap: 12px;
-      align-items: start;
+      grid-template-columns: minmax(220px, 420px) 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .process-cta {
+      justify-self: end;
     }
 
-    .process-cta { justify-content: flex-start; }
+    .step {
+      grid-template-columns: var(--col-index) 1fr var(--col-media);
+      grid-template-areas: "index body media";
+      column-gap: var(--gap-col);
+  row-gap: 0;
+  /* vertically center index + body with the media column */
+  align-items: center;
+    }
+
+    .step.reverse {
+      grid-template-columns: var(--col-media) 1fr var(--col-index);
+      grid-template-areas: "media body index";
+    }
+
+    .step-media {
+      margin-top: 0;
+    }
+    /* remove tiny top nudge used for mobile so headings align perfectly */
+    .step-body {
+      padding-top: 0;
+    }
+    .media-card {
+      padding: 18px;
+      border-radius: 36px;
+    }
+    .media-img {
+      border-radius: 22px;
+    }
+    .line-graphic {
+      inset: 16px;
+    }
   }
 
-  @media (max-width: 520px) {
-    .process-header { gap: 12px; }
-    .process-header .title { font-size: 1.5rem; }
-    .steps { gap: 20px; }
-    .media-img { max-height: 120px; }
+  /* ---- desktop wide polish ---- */
+  @media (min-width: 1080px) {
+    .our-process {
+      --col-index: 120px;
+  /* keep media smaller on very wide screens */
+  --col-media: 420px;
+      --gap-col: 24px;
+    }
   }
-
 </style>
