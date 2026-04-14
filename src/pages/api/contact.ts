@@ -91,7 +91,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       // Send internal notification to site owner about the new lead
       try {
         const adminNotify = await emailService.sendTemplatedEmail({
-          to: "moreiral468@gmail.com",
+          to: "contact@jussmor.com",
           templateName: "contactConfirmation",
           templateData: {
             name: fullName,
@@ -102,7 +102,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         });
 
         console.log(
-          `Admin notification ${adminNotify.success ? "sent" : "failed"} to moreiral468@gmail.com`,
+          `Admin notification ${adminNotify.success ? "sent" : "failed"} to contact@jussmor.com`,
           adminNotify.errors || [],
         );
       } catch (notifyErr) {
